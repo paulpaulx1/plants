@@ -22,7 +22,7 @@ export const fetchUser = id => {
 export default function userProfile(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return action.user
+      return [...state, action.user]
     default:
       return state
   }
