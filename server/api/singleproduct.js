@@ -1,14 +1,23 @@
 const router = require('express').Router()
-const {Beer} = require('../db')
+const {Product} = require('../db')
 
 //we need another get route for all products
+
+// GET /api/products
+router.get('/', async (req, res, next) => {
+  try {
+    const allProds = await Product.findAll()
+    res.json(allProds)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.get('/:id', async function(req, res, next) {
   const id = req.params.id
   try {
-    const thisBeer = await Beer.findOne({where: {id: id}})
-
-    res.send(thisBeer)
+    const thisProd = await Product.findByPK(id)
+    res.json(thisProd)
   } catch (error) {
     next(error)
   }
@@ -16,8 +25,8 @@ router.get('/:id', async function(req, res, next) {
 
 router.post('/', async (req, res, next) => {
   try {
-    const beer = await Beer.create(req.body)
-    res.json(beer)
+    const newProduct = await Product.create(req.body)
+    res.json(newProduct)
   } catch (e) {
     next(e)
   }
@@ -25,9 +34,9 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const beer = await Beer.findByPk(req.params.id)
-    await beer.destroy()
-    res.send(beer)
+    const product = await Product.findByPk(req.params.id)
+    await product.destroy()
+    res.json(product)
   } catch (ex) {
     next(ex)
   }
@@ -36,8 +45,13 @@ router.delete('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   const id = req.params.id
   try {
-    const beer = await Beer.findOne({where: {id: id}})
-    res.send(await beer.update(req.body))
+    const product = await Product.findByPk(id)
+    if (!product) {
+      res.sendStatus(404)
+    } else {
+      await product.update(req.body)
+      res.json(product)
+    }
   } catch (ex) {
     next(ex)
   }
