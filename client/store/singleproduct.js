@@ -11,7 +11,7 @@ export const setProduct = product => {
 export const fetchProduct = id => {
   return async dispatch => {
     try {
-      const product = await axios.get(`/beer/${id}`)
+      const product = await axios.get(`/api/products/${id}`)
 
       dispatch(setProduct(product.data))
     } catch (error) {
