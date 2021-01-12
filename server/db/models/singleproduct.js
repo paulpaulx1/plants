@@ -11,7 +11,7 @@ module.exports = db.define('products', {
     }
   },
   price: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.FLOAT,
     validate: {
       min: 0.01,
       notEmpty: true
