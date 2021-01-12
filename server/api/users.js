@@ -15,3 +15,47 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:id', async function(req, res, next) {
+  const id = req.params.id
+  try {
+    const thisUser = await User.findByPK(id)
+    res.json(thisUser)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    await user.destroy()
+    res.json(user)
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const newUser = await User.create(req.body)
+    res.json(newUser)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  const id = req.params.id
+  try {
+    const user = await User.findByPk(id)
+    if (!user) {
+      res.sendStatus(404)
+    } else {
+      await user.update(req.body)
+      res.json(user)
+    }
+  } catch (ex) {
+    next(ex)
+  }
+})
