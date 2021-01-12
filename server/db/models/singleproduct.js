@@ -5,21 +5,28 @@ module.exports = db.define('beer', {
   name: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   price: {
     type: Sequelize.NUMBER,
     validate: {
-      min: 0.01
+      min: 0.01,
+      notEmpty: true
     }
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
 
   inStock: {
-    type: BOOLEAN,
+    type: Sequelize.BOOLEAN,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -36,6 +43,9 @@ module.exports = db.define('beer', {
 
   brand: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 })
