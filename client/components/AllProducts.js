@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {fetchProducts} from '../store/allProducts'
 import {Link} from 'react-router-dom'
 
 export class AllProducts extends React.Component {
@@ -31,8 +32,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts()),
-    deleteProduct: product => dispatch(deleteProduct(product))
+    fetchProducts: () => dispatch(fetchProducts())
   }
 }
 
