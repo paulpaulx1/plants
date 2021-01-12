@@ -1,7 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db')
-
-//we need another get route for all products
+const {Product} = require('../db/models')
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
