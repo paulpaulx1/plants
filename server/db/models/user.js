@@ -6,7 +6,11 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    valiate: {
+      isEmail: true,
+      notEmpty: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -26,6 +30,22 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  paymentInfo: {
+    type: Sequelize.INTEGER,
+    validate: {
+      isCreditCard: true
+    }
   }
 })
 
