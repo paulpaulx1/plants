@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const initialState = []
-
 const SET_PRODUCT = 'SET_PRODUCT'
 
 export const setProduct = product => {
@@ -20,10 +18,14 @@ export const fetchProduct = id => {
   }
 }
 
+const initialState = {
+  single: []
+}
+
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCT:
-      return [...state, action.product]
+      return {...state, single: action.product}
     default:
       return state
   }

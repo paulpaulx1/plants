@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchUser} from '../store/user'
+import {fetchUser} from '../store/userprofile'
 import {connect} from 'react-redux'
 
 export class UserInfo extends React.Component {
@@ -22,16 +22,17 @@ export class UserInfo extends React.Component {
 
   // changePassword = async () => {}
 
-  componentDidMount = async () => {
-    await this.props.fetchUser()
+  componentDidMount() {
+    this.props.fetchUser(this.props.match.params.id)
     this.setState({
-      dataLoaded: true,
-      user: this.props.user
+      dataLoaded: true
     })
   }
   render() {
+    console.log('props------->', this.props)
+    const user = this.props.user
     if (this.state.dataLoaded === true) {
-      return <div>{this.state.user.name}</div>
+      return <div>{user.name}</div>
     } else {
       return <div>Loading</div>
     }
@@ -39,8 +40,9 @@ export class UserInfo extends React.Component {
 }
 
 const mapState = state => {
+  console.log('state------>', state)
   return {
-    user: state.user
+    user: state.userProfile.user
   }
 }
 

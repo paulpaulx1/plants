@@ -15,20 +15,21 @@ export class SingleProduct extends React.Component {
     //this will put 1 of the item into our shopping cart
   }
 
-  componentDidMount = async () => {
+  componentDidMount() {
     if (this.props.match) {
-      await this.fetchProduct(this.props.match.params.id)
-      await this.setState({dataLoaded: true, product: this.props.product})
+      this.props.fetchProduct(this.props.match.params.id)
+      this.setState({dataLoaded: true, product: this.props.product})
     }
   }
 
   render() {
+    console.log('props------->', this.props)
     if (this.state.dataLoaded === true) {
-      const product = this.state.product
+      const product = this.props.product.single
       return (
         <div>
           <div>{product.name}</div>
-          <div>{product.imageUrl}</div>
+          <img src={product.imageUrl} />
           <div>Price: {product.price}</div>
           <div>Description: {product.description}</div>
           <button type="button" onClick={this.addProductToCart}>
@@ -43,8 +44,9 @@ export class SingleProduct extends React.Component {
 }
 
 const mapState = state => {
+  console.log('state------>', state)
   return {
-    product: state.product
+    product: state.productReducer
   }
 }
 

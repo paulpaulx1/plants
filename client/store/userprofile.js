@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const initialState = []
-
 const SET_USER = 'SET_USER'
 
 export const setUser = user => {
@@ -11,7 +9,8 @@ export const setUser = user => {
 export const fetchUser = id => {
   return async dispatch => {
     try {
-      const user = await axios.get(`/users/${id}`)
+      const user = await axios.get(`/api/users/${id}`)
+      console.log('fetch---->', user)
       dispatch(setUser(user.data))
     } catch (error) {
       console.error(error)
@@ -19,10 +18,14 @@ export const fetchUser = id => {
   }
 }
 
+const initialState = {
+  user: []
+}
+
 export default function userProfile(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return [...state, action.user]
+      return {...state, user: action.user}
     default:
       return state
   }
