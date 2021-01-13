@@ -2,7 +2,8 @@
 const faker = require('faker')
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User} = require('../server/db/models/')
+const {Product} = require('../server/db/models/')
 
 async function seed() {
   await db.sync({force: true})
@@ -38,7 +39,27 @@ async function seed() {
 
   const users = await Promise.all(generateUsers())
 
+  const products = await Promise.all([
+    Product.create({
+      name: 'Shark Hat',
+      price: 19.95,
+      description: 'CHOMP CHOMP',
+      inStock: true,
+      imageUrl:
+        'https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg',
+      brand: 'American Apparel'
+    })
+  ])
+  //https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg
+  //https://wwf.hats2020s.com/i.php?https://images-na.ssl-images-amazon.com/images/I/71co9uaR6FL._AC_UX342_.jpg
+  //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIQ2QJfHUIWdsnchlPU7fbL2Z-3guOmWrzBD2ZLKRexgJ5ghsdwKoq_yr9QW7WA4qCBR2LMCsj&usqp=CAc
+  //https://www.villagehatshop.com/photos/product/standard/4511390S836292/-/size-one-size-fits-most.jpg
+  //https://cdn11.bigcommerce.com/s-a4990/images/stencil/1280x1280/products/1227/5550/DA2936-blk__59368.1541617592.jpg?c=2
+  //https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S55459/alt/55459.jpg
+  //https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S77663/-/size-one-size-fits-most.jpg
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
