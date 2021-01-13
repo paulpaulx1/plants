@@ -48,6 +48,51 @@ async function seed() {
       imageUrl:
         'https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg',
       brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Big Tophat',
+      price: 19.95,
+      description: 'Nice.',
+      inStock: true,
+      imageUrl:
+        'https://wwf.hats2020s.com/i.php?https://images-na.ssl-images-amazon.com/images/I/71co9uaR6FL._AC_UX342_.jpg',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Weird Balaklava',
+      price: 19.95,
+      description: 'Stay back',
+      inStock: true,
+      imageUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIQ2QJfHUIWdsnchlPU7fbL2Z-3guOmWrzBD2ZLKRexgJ5ghsdwKoq_yr9QW7WA4qCBR2LMCsj&usqp=CAc',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'King Cobra',
+      price: 19.95,
+      description: 'Hssssssssssssssss',
+      inStock: true,
+      imageUrl:
+        'https://www.villagehatshop.com/photos/product/standard/4511390S836292/-/size-one-size-fits-most.jpg',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Dire Wolf',
+      price: 19.95,
+      description: 'Dont murder me',
+      inStock: true,
+      imageUrl:
+        'https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S55459/alt/55459.jpg',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Spanish Plague Doctor',
+      price: 19.95,
+      description: 'Timely!',
+      inStock: true,
+      imageUrl:
+        'https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S77663/-/size-one-size-fits-most.jpg',
+      brand: 'American Apparel'
     })
   ])
   //https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg
