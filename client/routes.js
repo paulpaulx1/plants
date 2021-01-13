@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
+import AllProducts from './components/AllProducts'
 import {me} from './store'
-import {AllProducts} from './components/AllProducts'
 
 /**
  * COMPONENT
@@ -15,24 +15,23 @@ class Routes extends Component {
   }
 
   render() {
-    // const {isLoggedIn} = this.props
+    const {isLoggedIn} = this.props
 
     return (
-      <Route path="/home" component={AllProducts} />
-      // <AllProducts />
-      // <Switch>
-      //   {/* Routes placed here are available to all visitors */}
-      //   <Route path="/login" component={Login} />
-      //   <Route path="/signup" component={Signup} />
-      //   {isLoggedIn && (
-      //     <Switch>
-      //       {/* Routes placed here are only available after logging in */}
-      //       <Route path="/home" component={UserHome} />
-      //     </Switch>
-      //   )}
-      //   {/* Displays our Login component as a fallback */}
-      //   <Route component={Login} />
-      // </Switch>
+      <Switch>
+        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        {isLoggedIn && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route exact path="/home" component={UserHome} />
+          </Switch>
+        )}
+        {/* Displays our Login component as a fallback */}
+        <Route component={Login} />
+      </Switch>
     )
   }
 }

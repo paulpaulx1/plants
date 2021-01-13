@@ -7,14 +7,14 @@ export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
+
   render() {
     const {products} = this.props
-
     return (
       <div>
         <h1>All Products</h1>
 
-        {products.all.map(product => (
+        {products.map(product => (
           <div key={product.id}>
             <Link to={`/products/${product.id}`}>
               <h4>{product.name}</h4>
@@ -27,12 +27,14 @@ export class AllProducts extends React.Component {
   }
 }
 const mapState = state => {
-  return {products: state.products}
+  return {products: state.ProductsReducer.all}
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => {
+      dispatch(fetchProducts())
+    }
   }
 }
 

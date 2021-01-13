@@ -3,7 +3,7 @@ const User = require('./user')
 const Product = require('./singleproduct')
 const db = require('../db')
 
-const Cart = db.define('cart', {
+const Cart = db.define('Cart', {
   quantity: {
     type: Sequelize.DataTypes.INTEGER,
     defaultValue: 0
