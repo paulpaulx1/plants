@@ -4,23 +4,25 @@ const SET_PRODUCTS = 'SET_PRODUCTS'
 const ADD_PRODUCTS = 'ADD_PRODUCTS'
 const DELETE_PRODUCTS = 'DELETE_PRODUCTS'
 
-export const setProducts = products => ({
-  type: SET_PRODUCTS,
-  products
-})
+export const setProducts = products => {
+  return {
+    type: SET_PRODUCTS,
+    products
+  }
+}
 
 export const fetchProducts = () => {
   return async dispatch => {
     try {
-      const {data: products} = await axios.get('/api/products')
-      dispatch(setProducts(products))
+      const {data} = await axios.get('/api/products')
+      dispatch(setProducts(data))
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export const _addProduct = product => ({
+export const addingProduct = product => ({
   type: ADD_PRODUCTS,
   product
 })
@@ -28,11 +30,11 @@ export const _addProduct = product => ({
 export const addProduct = product => {
   return async dispatch => {
     const created = await axios.post('/api/products', product)
-    dispatch(_addProduct(created.data))
+    dispatch(addingProduct(created.data))
   }
 }
 
-export const _deleteProduct = product => ({
+export const deletingProduct = product => ({
   type: DELETE_PRODUCTS,
   product
 })
@@ -40,7 +42,7 @@ export const _deleteProduct = product => ({
 export const deleteProduct = product => {
   return async dispatch => {
     await axios.delete(`/api/products/${product.id}`)
-    dispatch(_deleteProduct(product))
+    dispatch(deletingProduct(product))
   }
 }
 
