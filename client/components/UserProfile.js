@@ -1,4 +1,6 @@
 import React from 'react'
+import {fetchUser} from '../store/user'
+import {connect} from 'react-redux'
 
 export class UserInfo extends React.Component {
   constructor() {
@@ -7,6 +9,18 @@ export class UserInfo extends React.Component {
       dataLoaded: false
     }
   }
+
+  // updateCreditCard = async () => {
+  // //
+  // }
+
+  // updateAddress = async () => {
+  //     //
+  // }
+
+  // updateEmail = async () => {}
+
+  // changePassword = async () => {}
 
   componentDidMount = async () => {
     await this.props.fetchUser()
@@ -24,14 +38,16 @@ export class UserInfo extends React.Component {
   }
 }
 
-// updateCreditCard = async () => {
-// //
-// }
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
 
-// updateAddress = async () => {
-//     //
-// }
+const mapDispatch = dispatch => {
+  return {
+    fetchUser: id => dispatch(fetchUser(id))
+  }
+}
 
-// updateEmail = async () => {}
-
-// changePassword = async () => {}
+export default connect(mapState, mapDispatch)(UserInfo)
