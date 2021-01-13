@@ -9,6 +9,7 @@ export class AllProducts extends React.Component {
   }
 
   render() {
+    console.log('props------->', this.props)
     const {products} = this.props
     return (
       <div>
@@ -27,7 +28,8 @@ export class AllProducts extends React.Component {
   }
 }
 const mapState = state => {
-  return {products: state.ProductsReducer.all}
+  console.log('state------>', state)
+  return {products: state.allProductsReducer.all}
 }
 
 const mapDispatch = dispatch => {
