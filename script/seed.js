@@ -1,4 +1,5 @@
 'use strict'
+const faker = require('faker')
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
@@ -7,10 +8,35 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  function generateUsers() {
+    let users = []
+
+    for (let id = 1; id <= 100; id++) {
+      users.push(
+        User.create({
+          name: faker.name.findName(),
+          email: faker.internet.email(),
+          address:
+            faker.address.streetAddress() +
+            ', ' +
+            faker.address.city() +
+            ', ' +
+            faker.address.stateAbbr() +
+            ', ' +
+            faker.address.zipCode(),
+          password: '123',
+          paymentInfo:
+            faker.finance.creditCardNumber() +
+            ', CVV ' +
+            faker.finance.creditCardCVV()
+        })
+      )
+    }
+
+    return users
+  }
+
+  const users = await Promise.all(generateUsers())
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
