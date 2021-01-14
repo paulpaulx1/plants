@@ -12,11 +12,13 @@ class GuestShoppingCart extends Component {
     return (
       <div>
         <h1>Shopping Cart</h1>
-        <div>
-          {/* {products.map(product => {
-            ;<div>NAME{product}</div>
-          })} */}
-        </div>
+
+        {products.map(product => (
+          <div key={product.id}>
+            <h4>{product.name}</h4>
+            <img src={product.imageUrl} height="100" />
+          </div>
+        ))}
       </div>
     )
   }
