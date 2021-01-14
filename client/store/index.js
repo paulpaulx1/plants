@@ -4,16 +4,18 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import productReducer from './singleproduct'
-import cartReducer from './cart'
 import allProductsReducer from './allProducts'
 import userProfile from './userprofile'
+import orderHistoryReducer from './orderHistory'
+import guestShoppingCartReducer from './guestShoppingCart'
 
 const reducer = combineReducers({
   user,
   productReducer,
-  cartReducer,
   allProductsReducer,
-  userProfile
+  userProfile,
+  orderHistoryReducer,
+  guestShoppingCartReducer
 })
 
 const middleware = composeWithDevTools(

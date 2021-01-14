@@ -1,7 +1,7 @@
 import React from 'react'
-// import axios from 'axios'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/singleproduct.js'
+import {addingToShoppingCart} from '../store/guestShoppingCart'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -18,21 +18,24 @@ export class SingleProduct extends React.Component {
   componentDidMount() {
     if (this.props.match) {
       this.props.fetchProduct(this.props.match.params.id)
-      this.setState({dataLoaded: true, product: this.props.product})
+      this.setState({dataLoaded: true})
     }
   }
 
   render() {
-    console.log('props------->', this.props)
     if (this.state.dataLoaded === true) {
       const product = this.props.product.single
+      console.log(product)
       return (
         <div>
           <div>{product.name}</div>
           <img src={product.imageUrl} />
           <div>Price: {product.price}</div>
           <div>Description: {product.description}</div>
-          <button type="button" onClick={this.addProductToCart}>
+          <button
+            type="submit"
+            onClick={this.props.addProductToGuestCart(product)}
+          >
             Add to cart
           </button>
         </div>
@@ -44,7 +47,6 @@ export class SingleProduct extends React.Component {
 }
 
 const mapState = state => {
-  console.log('state------>', state)
   return {
     product: state.productReducer
   }
@@ -52,7 +54,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProduct: id => dispatch(fetchProduct(id))
+    fetchProduct: id => dispatch(fetchProduct(id)),
+    addProductToGuestCart: product => dispatch(addingToShoppingCart(product))
   }
 }
 

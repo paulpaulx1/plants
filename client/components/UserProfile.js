@@ -29,7 +29,6 @@ export class UserInfo extends React.Component {
     })
   }
   render() {
-    console.log('props------->', this.props)
     const user = this.props.user
     if (this.state.dataLoaded === true) {
       return <div>{user.name}</div>
@@ -40,7 +39,6 @@ export class UserInfo extends React.Component {
 }
 
 const mapState = state => {
-  console.log('state------>', state)
   return {
     user: state.userProfile.user
   }
