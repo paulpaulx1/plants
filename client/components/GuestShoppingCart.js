@@ -13,9 +13,9 @@ class GuestShoppingCart extends Component {
       <div>
         <h1>Shopping Cart</h1>
         <div>
-          {products.map(product => {
+          {/* {products.map(product => {
             ;<div>NAME{product}</div>
-          })}
+          })} */}
         </div>
       </div>
     )

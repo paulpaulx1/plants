@@ -34,7 +34,7 @@ export class SingleProduct extends React.Component {
           <div>Description: {product.description}</div>
           <button
             type="submit"
-            onClick={this.props.addProductToGuestCart(product)}
+            onClick={() => this.props.addProductToGuestCart(product)}
           >
             Add to cart
           </button>

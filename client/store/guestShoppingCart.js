@@ -27,21 +27,25 @@ export const getGuestShoppingCart = () => {
 }
 
 export const addingToShoppingCart = product => {
+  console.log('product ----->', product)
+  console.log('localstorage ---->', localStorage)
   return dispatch => {
     try {
       let cart = JSON.parse(localStorage.getItem('shoppingCart'))
       if (cart) {
         const productArray = [...cart].map(item => item.id)
-        if (!productArray.includes(product.id))
-          cart.push({...product, quantity: 1})
+        if (!productArray.includes(product.id)) product.orderQuantity++
+        cart.push({...product})
         // cart.product.orderQuantity++
       } else {
         cart = []
-        cart.push({...product, quantity: 1})
+        // product.orderQuantity++
+        cart.push({...product})
         // cart.product.orderQuantity++
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))
+      // localStorage.clear()
     } catch (err) {
       console.log(err)
     }
