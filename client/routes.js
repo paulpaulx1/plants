@@ -6,6 +6,8 @@ import {Login, Signup, UserHome} from './components'
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
 import UserProfile from './components/UserProfile'
+import GuestShoppingCart from './components/GuestShoppingCart'
+
 import {me} from './store'
 
 /**
@@ -23,10 +25,11 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={AllProducts} />
-        <Route exact path="/single/:id" component={SingleProduct} />
+        <Route exact path="/product/:id" component={SingleProduct} />
         <Route exact path="/user/:id" component={UserProfile} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/guest/shoppingcart" component={GuestShoppingCart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -34,7 +37,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route component={AllProducts} />
       </Switch>
     )
   }
