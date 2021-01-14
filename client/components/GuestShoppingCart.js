@@ -17,6 +17,9 @@ class GuestShoppingCart extends Component {
           <div key={product.id}>
             <h4>{product.name}</h4>
             <img src={product.imageUrl} height="100" />
+            <h4>Quantity: {product.orderQuantity}</h4>
+            {/* Need to fix rounding of cents */}
+            <h4>Price: {product.price * product.orderQuantity}</h4>
           </div>
         ))}
       </div>
