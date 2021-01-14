@@ -34,9 +34,11 @@ export const addingToShoppingCart = product => {
         const productArray = [...cart].map(item => item.id)
         if (!productArray.includes(product.id))
           cart.push({...product, quantity: 1})
+        // cart.product.orderQuantity++
       } else {
         cart = []
         cart.push({...product, quantity: 1})
+        // cart.product.orderQuantity++
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))

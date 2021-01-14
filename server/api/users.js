@@ -27,8 +27,9 @@ router.get('/:id', async function(req, res, next) {
   }
 })
 
-//(CART) update quantity of product in cart
+//(CART) update quantity of product in cart ??? double-check get or put
 router.get('/:id/cart/:action', async function(req, res, next) {
+  console.log(req.body)
   try {
     const {productId, orderId} = req.body
     const orderItem = await OrderHistory.findOne({
@@ -48,8 +49,9 @@ router.get('/:id/cart/:action', async function(req, res, next) {
     next(error)
   }
 })
-//(CART) add product to cart
+//(CART) add product to cart ?? check the methods
 router.put('/:id/cart', async (req, res, next) => {
+  console.log(req.body)
   try {
     const currentProduct = await Product.findByPk(req.body.id)
     const currentOrder = await Order.findOne({
@@ -91,6 +93,7 @@ router.delete('/:id/cart/:productId', async (req, res, next) => {
 })
 //(CART) retrieve user cart
 router.get('/:id/cart', async (req, res, next) => {
+  console.log('req---->', req)
   try {
     const cartItems = await Product.findAll({
       include: {
