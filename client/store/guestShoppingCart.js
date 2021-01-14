@@ -34,14 +34,21 @@ export const addingToShoppingCart = product => {
       let cart = JSON.parse(localStorage.getItem('shoppingCart'))
       if (cart) {
         const productArray = [...cart].map(item => item.id)
-        if (!productArray.includes(product.id)) product.orderQuantity++
-        cart.push({...product})
-        // cart.product.orderQuantity++
+        // if product is not in the cart
+        if (!productArray.includes(product.id)) {
+          cart.push(product)
+        } else {
+          console.log('cart', cart)
+          for (let i = 0; i < cart.length; i++) {
+            if (product.id === cart[i].id) {
+              cart[i].orderQuantity++
+            }
+          }
+        }
       } else {
         cart = []
-        // product.orderQuantity++
-        cart.push({...product})
-        // cart.product.orderQuantity++
+
+        cart.push(product)
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))
