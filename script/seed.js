@@ -93,6 +93,41 @@ async function seed() {
       imageUrl:
         'https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S77663/-/size-one-size-fits-most.jpg',
       brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Angler Fish',
+      price: 19.95,
+      description: 'From the deep',
+      inStock: true,
+      imageUrl:
+        'https://www.villagehatshop.com/photos/product/giant/4511390S438707/-/size-one-size-fits-most.jpg',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Parrot Head',
+      price: 19.95,
+      description: 'Jamaica Mistake-a',
+      inStock: true,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/51B-vCTFIxL._AC_.jpg',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Squid Hat',
+      price: 19.95,
+      description: 'Release the Kraken',
+      inStock: true,
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/1706/5935/products/f9ced1926bc8d46dd2a12b11302c93be_1024x1024.jpg?v=1571710069',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Biker Boi',
+      price: 19.95,
+      description: 'Yes sir',
+      imageUrl:
+        'https://cdn.shoplightspeed.com/shops/608600/files/27491685/700x700x2/leather-man-garrison-pisscutter-leather-cap.jpg',
+      brand: 'American Apparel'
     })
   ])
   //https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg

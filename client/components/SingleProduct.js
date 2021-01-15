@@ -29,7 +29,7 @@ export class SingleProduct extends React.Component {
       return (
         <div>
           <div>{product.name}</div>
-          <img src={product.imageUrl} />
+          <img src={product.imageUrl} height="444" />
           <div>Price: {product.price}</div>
           <div>Description: {product.description}</div>
           <button
