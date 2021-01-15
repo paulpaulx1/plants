@@ -23,22 +23,27 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    let styleObj = {fontSize: '18px'}
     if (this.state.dataLoaded === true) {
       const product = this.props.product.single
       console.log(product)
+
       return (
-        <div>
-          <div>{product.name}</div>
-          <img src={product.imageUrl} height="444" />
-          <div>Price: {product.price}</div>
-          <div>Description: {product.description}</div>
-          <button
-            type="submit"
-            onClick={() => this.props.addProductToGuestCart(product)}
-          >
-            Add to cart
-          </button>
-        </div>
+        <header className="flex-container">
+          <span>
+            <div style={styleObj}>{product.name}</div>
+            <img src={product.imageUrl} height="404" />
+            <div style={styleObj}>Price: {product.price}</div>
+            <div style={styleObj}>Description: {product.description}</div>
+            <button
+              style={{fontSize: '16px', background: 'transparent'}}
+              type="submit"
+              onClick={() => this.props.addProductToGuestCart(product)}
+            >
+              Add to cart
+            </button>
+          </span>
+        </header>
       )
     } else {
       return <div>LOADING</div>

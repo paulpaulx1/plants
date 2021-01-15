@@ -36,9 +36,12 @@ form div {
 .all-h1 {
   align-content: center;
 }
+div {
+  font-size: '20px';
+}
 .flex-container div {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgba(36, 35, 35, 0.13);
+  color: black;
   justify-content: center;
   /* border:3px #ccc solid; */
 
