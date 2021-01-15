@@ -20,7 +20,8 @@ export class AllProducts extends React.Component {
               <div key={product.id}>
                 <Link to={`/product/${product.id}`}>
                   <h4>{product.name}</h4>
-                  <img src={product.imageUrl} height="400" />
+                  <h4>{(product.price * 1).toFixed(2)}</h4>
+                  <img src={product.imageUrl} height="300" />
                 </Link>
               </div>
             ))}
