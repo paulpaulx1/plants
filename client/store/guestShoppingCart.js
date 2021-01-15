@@ -1,17 +1,27 @@
 const SET_GUEST_SHOPPING_CART = 'SET_GUEST_SHOPPING_CART'
 const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
-
-// const ADD_PRODUCT = 'ADD_PRODUCT'
-// const SUBTRACT_PRODUCT = 'SUBTRACT_PRODUCT'
-// const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const ADD_TO_CART = 'ADD_TO_CART'
+const SUBTRACT_FROM_CART = 'SUBTRACT_FROM_CART'
+const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 export const setGuestShoppingCart = products => ({
   type: SET_GUEST_SHOPPING_CART,
   products
 })
-
 export const addProductToCart = guestCart => ({
   type: ADD_PRODUCT_TO_CART,
+  guestCart
+})
+export const addToCart = guestCart => ({
+  type: ADD_TO_CART,
+  guestCart
+})
+export const subtractFromCart = guestCart => ({
+  type: SUBTRACT_FROM_CART,
+  guestCart
+})
+export const deleteFromCart = guestCart => ({
+  type: DELETE_FROM_CART,
   guestCart
 })
 
@@ -27,18 +37,16 @@ export const getGuestShoppingCart = () => {
 }
 
 export const addingToShoppingCart = product => {
-  console.log('product ----->', product)
-  console.log('localstorage ---->', localStorage)
   return dispatch => {
     try {
       let cart = JSON.parse(localStorage.getItem('shoppingCart'))
       if (cart) {
         const productArray = [...cart].map(item => item.id)
-        // if product is not in the cart
+        // checking id to see if product is not in the cart
         if (!productArray.includes(product.id)) {
           cart.push(product)
         } else {
-          console.log('cart', cart)
+          // if product is in the cart...loop through to increase quantity
           for (let i = 0; i < cart.length; i++) {
             if (product.id === cart[i].id) {
               cart[i].orderQuantity++
@@ -47,18 +55,65 @@ export const addingToShoppingCart = product => {
         }
       } else {
         cart = []
-
         cart.push(product)
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))
-      // localStorage.clear()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+export const addingToCart = productId => {
+  return dispatch => {
+    try {
+      let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+      cart.filter(item => {
+        //filter through cart to see and increase the quantity of the product
+        if (productId === item.id) {
+          return (item.orderQuantity += 1)
+        }
+      })
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+      dispatch(addToCart(cart))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+export const subtractingFromCart = productId => {
+  return dispatch => {
+    try {
+      let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+      cart.filter(item => {
+        //filter through cart to see and decrease the quantity of the product
+        if (productId === item.id && item.orderQuantity !== 1) {
+          return (item.orderQuantity -= 1)
+        }
+      })
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+      dispatch(subtractFromCart(cart))
     } catch (err) {
       console.log(err)
     }
   }
 }
 
+export const deletingFromCart = productId => {
+  return dispatch => {
+    try {
+      let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+      let newCart = cart.filter(item => {
+        //filter through cart and return items that are not the product
+        if (productId !== item.id) return item
+      })
+      localStorage.setItem('shoppingCart', JSON.stringify(newCart))
+      dispatch(deleteFromCart(newCart))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 const initialState = {
   cart: []
 }
@@ -68,6 +123,12 @@ export default function guestShoppingCartReducer(state = initialState, action) {
     case SET_GUEST_SHOPPING_CART:
       return {...state, cart: action.products}
     case ADD_PRODUCT_TO_CART:
+      return {...state, cart: action.guestCart}
+    case ADD_TO_CART:
+      return {...state, cart: action.guestCart}
+    case SUBTRACT_FROM_CART:
+      return {...state, cart: action.guestCart}
+    case DELETE_FROM_CART:
       return {...state, cart: action.guestCart}
     default:
       return state
