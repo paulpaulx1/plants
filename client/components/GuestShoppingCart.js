@@ -29,13 +29,13 @@ class GuestShoppingCart extends Component {
   }
 
   render() {
-    let styleObj = {fontSize: '18px'}
     const products = this.props.products
+    console.log('products-->', products)
 
     return (
       <div>
         <h1>Shopping Cart</h1>
-        {products === null ? (
+        {products.length === 0 ? (
           <div>Shopping Cart Is Empty</div>
         ) : (
           <div>
@@ -50,16 +50,18 @@ class GuestShoppingCart extends Component {
                   )}
                 </h4>
                 <button
+                  className="cartAddSubtractButton"
                   type="button"
                   onClick={() => this.props.addToCart(product.id)}
                 >
-                  Add To Product
+                  +
                 </button>
                 <button
+                  className="cartAddSubtractButton"
                   type="button"
                   onClick={() => this.props.subtractFromCart(product.id)}
                 >
-                  Subtract From Cart
+                  -
                 </button>
                 <button
                   type="button"
@@ -67,7 +69,13 @@ class GuestShoppingCart extends Component {
                 >
                   Remove From Cart
                 </button>
-                {/* need to figure out how to render 'Shopping Cart Is Empty' if all products have been removed */}
+              </div>
+            ))}
+            {/* need to figure out how to render 'Shopping Cart Is Empty' if all products have been removed */}
+            <div>
+              {products === null ? (
+                <div>Shopping Cart Is Empty</div>
+              ) : (
                 <button
                   type="button"
                   onClick={() => {
@@ -76,8 +84,8 @@ class GuestShoppingCart extends Component {
                 >
                   Proceed To Checkout
                 </button>
-              </div>
-            ))}
+              )}
+            </div>
           </div>
         )}
       </div>

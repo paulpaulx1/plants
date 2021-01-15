@@ -54,7 +54,7 @@ const Product = db.define('Product', {
     validate: {
       notEmpty: true
     },
-    defaultValue: 0
+    defaultValue: 1
   }
 })
 module.exports = Product

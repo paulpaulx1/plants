@@ -16,6 +16,12 @@ form div {
   display: inline-block;
 }
 
+.cartAddSubtractButton {
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 40px;
+}
 
 .flex-container {
   /* background-color: #282c34; */
@@ -54,5 +60,4 @@ form div {
   /* display: flex;
   flex-direction: column; */
   /* align-content: space-between; */
-
-
+}
