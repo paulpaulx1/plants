@@ -7,6 +7,15 @@ class GuestShoppingCart extends Component {
     this.props.loadGuestShoppingCart()
   }
 
+  //Need to link to confirmation page!
+  processOrder() {
+    const products = this.props.products
+    let total = products.map(x => Number(x.price * x.orderQuantity).toFixed(2))
+    let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+    cart.map(product => (product.processed = true))
+    localStorage.setItem('shoppingCart', JSON.stringify(cart))
+  }
+
   render() {
     let styleObj = {fontSize: '18px'}
     const products = this.props.products
@@ -28,6 +37,9 @@ class GuestShoppingCart extends Component {
                   </h4>
                 </div>
               ))}
+              <button type="submit" onClick={() => this.processOrder()}>
+                Buy now!
+              </button>
             </div>
           </span>
         </header>
