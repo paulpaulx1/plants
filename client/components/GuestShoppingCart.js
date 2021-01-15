@@ -1,10 +1,22 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getGuestShoppingCart} from '../store/guestShoppingCart'
+import {
+  getGuestShoppingCart,
+  addingToCart,
+  subtractingFromCart,
+  deletingFromCart
+} from '../store/guestShoppingCart'
 
 class GuestShoppingCart extends Component {
   componentDidMount() {
     this.props.loadGuestShoppingCart()
+    this.props.addToCart()
+    this.props.subtractFromCart()
+    this.props.deleteFromCart()
+  }
+
+  roundDecimal(num) {
+    return Number(num).toFixed(2)
   }
 
   render() {
@@ -12,16 +24,51 @@ class GuestShoppingCart extends Component {
     return (
       <div>
         <h1>Shopping Cart</h1>
-
-        {products.map(product => (
-          <div key={product.id}>
-            <h4>{product.name}</h4>
-            <img src={product.imageUrl} height="100" />
-            <h4>Quantity: {product.orderQuantity}</h4>
-            {/* Need to fix rounding of cents */}
-            <h4>Price: {product.price * product.orderQuantity}</h4>
+        {products === null ? (
+          <div>Shopping Cart Is Empty</div>
+        ) : (
+          <div>
+            {products.map(product => (
+              <div key={product.id}>
+                <h4>{product.name}</h4>
+                <img src={product.imageUrl} height="100" />
+                <h4>Quantity: {product.orderQuantity}</h4>
+                <h4>
+                  Price: ${this.roundDecimal(
+                    product.price * product.orderQuantity
+                  )}
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => this.props.addToCart(product.id)}
+                >
+                  Add To Product
+                </button>
+                <button
+                  type="button"
+                  onClick={() => this.props.subtractFromCart(product.id)}
+                >
+                  Subtract From Cart
+                </button>
+                <button
+                  type="button"
+                  onClick={() => this.props.deleteFromCart(product.id)}
+                >
+                  Remove From Cart
+                </button>
+                {/* need to figure out how to render 'Shopping Cart Is Empty' if all products have been removed */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log('checkout button clicked!')
+                  }}
+                >
+                  Proceed To Checkout
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
     )
   }
@@ -37,6 +84,15 @@ const mapDispatch = dispatch => {
   return {
     loadGuestShoppingCart: () => {
       dispatch(getGuestShoppingCart())
+    },
+    addToCart: productId => {
+      dispatch(addingToCart(productId))
+    },
+    subtractFromCart: productId => {
+      dispatch(subtractingFromCart(productId))
+    },
+    deleteFromCart: productId => {
+      dispatch(deletingFromCart(productId))
     }
   }
 }
