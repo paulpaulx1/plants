@@ -1,22 +1,23 @@
 const router = require('express').Router()
-const {User, Product, OrderHistory, Order} = require('../db/models')
+
+const {Product, OrderHistory, Order} = require('../db/models')
 module.exports = router
 
-//why is this :action and why is it a get route resolve this
-router.get('/:id/cart/:action', async function(req, res, next) {
-  console.log(req.body, '<===body params====>', req.params)
+//ensure it remains as put, increases and decreases quantity inside cart
+router.put('/:id/cart/:action', async function(req, res, next) {
   try {
-    const {productId, orderId} = req.body
+    const {ProductId, OrderId} = req.body
     const orderItem = await OrderHistory.findOne({
       where: {
-        productId: productId,
-        orderId: orderId
+        ProductId: ProductId,
+        OrderId: OrderId
       }
     })
-    if (req.params.action === 'add') {
+    if (req.params.action === 'increment') {
       await orderItem.increment('quantity')
     }
-    if (req.params.action === 'remove') {
+    if (req.params.action === 'decrement') {
+
       await orderItem.decrement('quantity')
     }
     res.json(orderItem)
@@ -25,35 +26,30 @@ router.get('/:id/cart/:action', async function(req, res, next) {
   }
 })
 
-//(CART) add product to cart ?? check the methods
-//should this be a post????
 
-//add product to cart route needs to be on the product side
-//it also needs to add the item to through table 'order history'
-//order history has productid and userid-we use these two ids to
-//update the user cart
-
+//adds to the cart
 router.put('/:id/cart', async (req, res, next) => {
-  console.log('===========>', req.body.id)
+  //ensure that front-end has proper naming convention for id being sent as "ProductId"
+  //ensure that front-end has proper naming convention for quantity being sent as "quantity"
   try {
-    const currentProduct = await Product.findByPk(req.body.id)
+    const currentProduct = await Product.findByPk(req.body.ProductId)
     const currentOrder = await Order.findOne({
       where: {UserId: req.params.id, processed: false}
     })
     await currentOrder.addProduct(currentProduct)
-    const newProduct = await Product.findByPk(req.body.id, {
+
+    const newProduct = await Product.findByPk(req.body.ProductId, {
       include: {
         model: Order
       }
     })
     const orderItem = await OrderHistory.findOne({
       where: {
-        productId: req.body.id,
-        orderId: currentOrder.id
+        ProductId: req.body.ProductId,
+        OrderId: currentOrder.id
       }
     })
     if (req.body.quantity) {
-      //is this decreasing our inventory?
       const newQuantity = req.body.quantity + orderItem.quantity - 1
       await orderItem.update({quantity: newQuantity})
     }
@@ -76,9 +72,9 @@ router.delete('/:id/cart/:productId', async (req, res, next) => {
     next(err)
   }
 })
+
 //(CART) retrieve user cart
 router.get('/:id/cart', async (req, res, next) => {
-  console.log('req---->', req.body)
   try {
     const cartItems = await Product.findAll({
       include: {
@@ -99,6 +95,7 @@ router.get('/:id/cart', async (req, res, next) => {
     next(error)
   }
 })
+
 //GET user order history
 router.get('/:id/orderHistory', async (req, res, next) => {
   try {
@@ -111,5 +108,3 @@ router.get('/:id/orderHistory', async (req, res, next) => {
     next(error)
   }
 })
-
-/////////// ORDER HISTORIES FUNCTIONS AS SHOPPING CART IN DATABASE
