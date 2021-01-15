@@ -15,6 +15,44 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-#nav-cart {
-  font-size: 25px;
+
+
+.flex-container {
+  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 20px;
+
+  /* color: white; */
 }
+.flex-cart {
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: top;
+  font-size: 12px;
+  margin: 20px;
+  flex: 1;
+}
+.all-h1 {
+  align-content: center;
+}
+
+.flex-container div {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: black;
+  justify-content: center;
+
+  flex: 1;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-content: space-between; */
+
+

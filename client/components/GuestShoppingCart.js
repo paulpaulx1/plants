@@ -19,8 +19,19 @@ class GuestShoppingCart extends Component {
     return Number(num).toFixed(2)
   }
 
-  render() {
+  //Need to link to confirmation page!
+  processOrder() {
     const products = this.props.products
+    let total = products.map(x => Number(x.price * x.orderQuantity).toFixed(2))
+    let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+    cart.map(product => (product.processed = true))
+    localStorage.setItem('shoppingCart', JSON.stringify(cart))
+  }
+
+  render() {
+    let styleObj = {fontSize: '18px'}
+    const products = this.props.products
+
     return (
       <div>
         <h1>Shopping Cart</h1>

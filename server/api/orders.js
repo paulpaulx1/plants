@@ -1,4 +1,5 @@
 const router = require('express').Router()
+
 const {Product, OrderHistory, Order} = require('../db/models')
 module.exports = router
 
@@ -16,6 +17,7 @@ router.put('/:id/cart/:action', async function(req, res, next) {
       await orderItem.increment('quantity')
     }
     if (req.params.action === 'decrement') {
+
       await orderItem.decrement('quantity')
     }
     res.json(orderItem)
@@ -23,6 +25,7 @@ router.put('/:id/cart/:action', async function(req, res, next) {
     next(error)
   }
 })
+
 
 //adds to the cart
 router.put('/:id/cart', async (req, res, next) => {
@@ -34,6 +37,7 @@ router.put('/:id/cart', async (req, res, next) => {
       where: {UserId: req.params.id, processed: false}
     })
     await currentOrder.addProduct(currentProduct)
+
     const newProduct = await Product.findByPk(req.body.ProductId, {
       include: {
         model: Order

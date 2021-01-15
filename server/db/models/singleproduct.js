@@ -47,13 +47,14 @@ const Product = db.define('Product', {
       notEmpty: true
     }
   },
+
   orderQuantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true
     },
-    defaultValue: 1
+    defaultValue: 0
   }
 })
 module.exports = Product
