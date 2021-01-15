@@ -3,6 +3,7 @@ const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const SUBTRACT_FROM_CART = 'SUBTRACT_FROM_CART'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
+const GUEST_CHECKOUT = 'GUEST_CHECKOUT'
 
 export const setGuestShoppingCart = products => ({
   type: SET_GUEST_SHOPPING_CART,
@@ -24,6 +25,9 @@ export const deleteFromCart = guestCart => ({
   type: DELETE_FROM_CART,
   guestCart
 })
+export const guestCheckout = () => ({
+  type: GUEST_CHECKOUT
+})
 
 export const getGuestShoppingCart = () => {
   return async dispatch => {
@@ -35,7 +39,6 @@ export const getGuestShoppingCart = () => {
     }
   }
 }
-
 export const addingToShoppingCart = product => {
   return dispatch => {
     try {
@@ -98,7 +101,6 @@ export const subtractingFromCart = productId => {
     }
   }
 }
-
 export const deletingFromCart = productId => {
   return dispatch => {
     try {
@@ -114,6 +116,47 @@ export const deletingFromCart = productId => {
     }
   }
 }
+export const guestCartCheckout = () => {
+  return dispatch => {
+    try {
+      let product = {
+        brand: '',
+        createdAt: '',
+        description: '',
+        id: 0,
+        imageUrl: '',
+        inStock: false,
+        name: '',
+        orderQuantity: 0,
+        price: '',
+        updatedAt: ''
+      }
+      let cart = JSON.parse(localStorage.getItem('shoppingCart'))
+      if (cart) {
+        const productArray = [...cart].map(item => item.id)
+        // checking id to see if product is not in the cart
+        if (!productArray.includes(product.id)) {
+          cart.push(product)
+        } else {
+          // if product is in the cart...loop through to increase quantity
+          for (let i = 0; i < cart.length; i++) {
+            if (product.id === cart[i].id) {
+              cart[i].orderQuantity++
+            }
+          }
+        }
+      } else {
+        cart = []
+        cart.push(product)
+      }
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+      dispatch(guestCheckout())
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 const initialState = {
   cart: []
 }
@@ -130,6 +173,8 @@ export default function guestShoppingCartReducer(state = initialState, action) {
       return {...state, cart: action.guestCart}
     case DELETE_FROM_CART:
       return {...state, cart: action.guestCart}
+    case GUEST_CHECKOUT:
+      return state
     default:
       return state
   }

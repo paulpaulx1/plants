@@ -4,14 +4,36 @@ import {
   getGuestShoppingCart,
   addingToCart,
   subtractingFromCart,
-  deletingFromCart
+  deletingFromCart,
+  guestCartCheckout
 } from '../store/guestShoppingCart'
 
 class GuestShoppingCart extends Component {
+  constructor(props) {
+    super(props)
+    this.guestCartCheckout = this.guestCartCheckout.bind(this)
+    this.addToCart = this.addToCart.bind(this)
+    this.subtractFromCart = this.subtractFromCart.bind(this)
+    this.deleteFromCart = this.deleteFromCart.bind(this)
+  }
   componentDidMount() {
     this.props.loadGuestShoppingCart()
+  }
+
+  guestCartCheckout(event) {
+    event.preventDefault()
+    this.props.guestCartCheckout()
+  }
+  addToCart(event) {
+    event.preventDefault()
     this.props.addToCart()
+  }
+  subtractFromCart(event) {
+    event.preventDefault()
     this.props.subtractFromCart()
+  }
+  deleteFromCart(event) {
+    event.preventDefault()
     this.props.deleteFromCart()
   }
 
@@ -20,17 +42,15 @@ class GuestShoppingCart extends Component {
   }
 
   //Need to link to confirmation page!
-  processOrder() {
-    const products = this.props.products
-    let total = products.map(x => Number(x.price * x.orderQuantity).toFixed(2))
-    let cart = JSON.parse(localStorage.getItem('shoppingCart'))
-    cart.map(product => (product.processed = true))
-    localStorage.setItem('shoppingCart', JSON.stringify(cart))
-  }
 
   render() {
     const products = this.props.products
-    console.log('products-->', products)
+    let total = products
+      .reduce((acc, product) => acc + product.price * product.orderQuantity, 0)
+      .toFixed(2)
+    console.log('this.props-->', this.props)
+    console.log('cart', products.cart)
+    console.log('products', products)
 
     return (
       <div>
@@ -52,38 +72,32 @@ class GuestShoppingCart extends Component {
                 <button
                   className="cartAddSubtractButton"
                   type="button"
-                  onClick={() => this.props.addToCart(product.id)}
+                  onClick={this.addToCart(product.id)}
                 >
                   +
                 </button>
                 <button
                   className="cartAddSubtractButton"
                   type="button"
-                  onClick={() => this.props.subtractFromCart(product.id)}
+                  onClick={this.subtractFromCart(product.id)}
                 >
                   -
                 </button>
-                <button
-                  type="button"
-                  onClick={() => this.props.deleteFromCart(product.id)}
-                >
+                <button type="button" onClick={this.deleteFromCart(product.id)}>
                   Remove From Cart
                 </button>
               </div>
             ))}
-            {/* need to figure out how to render 'Shopping Cart Is Empty' if all products have been removed */}
             <div>
               {products === null ? (
                 <div>Shopping Cart Is Empty</div>
               ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('checkout button clicked!')
-                  }}
-                >
-                  Proceed To Checkout
-                </button>
+                <div>
+                  <div>TOTAL: ${total}</div>
+                  <button type="submit" onClick={this.guestCartCheckout}>
+                    Proceed To Checkout
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -112,7 +126,8 @@ const mapDispatch = dispatch => {
     },
     deleteFromCart: productId => {
       dispatch(deletingFromCart(productId))
-    }
+    },
+    guestCartCheckout: () => dispatch(guestCartCheckout())
   }
 }
 
