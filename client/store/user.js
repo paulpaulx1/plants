@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const SET_USER = 'SET_USER'
+const SET_USERS = 'SET_USERS'
 
 /**
  * INITIAL STATE
@@ -57,6 +57,24 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const setUsers = users => {
+  return {
+    type: SET_USERS,
+    users
+  }
+}
+
+export const fetchUsers = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/users')
+      dispatch(setUsers(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -66,6 +84,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case SET_USERS:
+      return {...state, all: [action.users]}
     default:
       return state
   }
