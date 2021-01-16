@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {
   getGuestShoppingCart,
   addingToCart,
@@ -46,10 +47,6 @@ class GuestShoppingCart extends Component {
       .reduce((acc, product) => acc + product.price * product.orderQuantity, 0)
       .toFixed(2)
 
-    console.log('this.props-->', this.props)
-    console.log('cart', products.cart)
-    console.log('products', products)
-
     return (
       <div>
         <h1>Shopping Cart</h1>
@@ -94,12 +91,14 @@ class GuestShoppingCart extends Component {
               ) : (
                 <div>
                   <div>TOTAL: ${total}</div>
-                  <button
-                    type="submit"
-                    onClick={() => this.guestCartCheckout()}
-                  >
-                    Proceed To Checkout
-                  </button>
+                  <Link to="/guest/orderconfirmation">
+                    <button
+                      type="submit"
+                      onClick={() => this.guestCartCheckout()}
+                    >
+                      Place Your Order
+                    </button>
+                  </Link>
                 </div>
               )}
             </div>
