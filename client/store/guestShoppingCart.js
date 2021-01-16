@@ -62,6 +62,7 @@ export const addingToShoppingCart = product => {
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))
+      // localStorage.clear()
     } catch (err) {
       console.log(err)
     }
@@ -119,38 +120,11 @@ export const deletingFromCart = productId => {
 export const guestCartCheckout = () => {
   return dispatch => {
     try {
-      let product = {
-        brand: '',
-        createdAt: '',
-        description: '',
-        id: 0,
-        imageUrl: '',
-        inStock: false,
-        name: '',
-        orderQuantity: 0,
-        price: '',
-        updatedAt: ''
-      }
-      let cart = JSON.parse(localStorage.getItem('shoppingCart'))
-      if (cart) {
-        const productArray = [...cart].map(item => item.id)
-        // checking id to see if product is not in the cart
-        if (!productArray.includes(product.id)) {
-          cart.push(product)
-        } else {
-          // if product is in the cart...loop through to increase quantity
-          for (let i = 0; i < cart.length; i++) {
-            if (product.id === cart[i].id) {
-              cart[i].orderQuantity++
-            }
-          }
-        }
-      } else {
-        cart = []
-        cart.push(product)
-      }
+      let cart = []
+
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
-      dispatch(guestCheckout())
+      dispatch(deleteFromCart(cart))
+      // localStorage.clear()
     } catch (err) {
       console.log(err)
     }

@@ -20,21 +20,17 @@ class GuestShoppingCart extends Component {
     this.props.loadGuestShoppingCart()
   }
 
-  guestCartCheckout(event) {
-    event.preventDefault()
+  guestCartCheckout() {
     this.props.guestCartCheckout()
   }
   addToCart(event) {
-    event.preventDefault()
-    this.props.addToCart()
+    this.props.addToCart(event)
   }
   subtractFromCart(event) {
-    event.preventDefault()
-    this.props.subtractFromCart()
+    this.props.subtractFromCart(event)
   }
   deleteFromCart(event) {
-    event.preventDefault()
-    this.props.deleteFromCart()
+    this.props.deleteFromCart(event)
   }
 
   roundDecimal(num) {
@@ -45,9 +41,11 @@ class GuestShoppingCart extends Component {
 
   render() {
     const products = this.props.products
+
     let total = products
       .reduce((acc, product) => acc + product.price * product.orderQuantity, 0)
       .toFixed(2)
+
     console.log('this.props-->', this.props)
     console.log('cart', products.cart)
     console.log('products', products)
@@ -65,25 +63,27 @@ class GuestShoppingCart extends Component {
                 <img src={product.imageUrl} height="100" />
                 <h4>Quantity: {product.orderQuantity}</h4>
                 <h4>
-                  Price: ${this.roundDecimal(
-                    product.price * product.orderQuantity
-                  )}
+                  Price: $
+                  {this.roundDecimal(product.price * product.orderQuantity)}
                 </h4>
                 <button
                   className="cartAddSubtractButton"
                   type="button"
-                  onClick={this.addToCart(product.id)}
+                  onClick={() => this.addToCart(product.id)}
                 >
                   +
                 </button>
                 <button
                   className="cartAddSubtractButton"
                   type="button"
-                  onClick={this.subtractFromCart(product.id)}
+                  onClick={() => this.subtractFromCart(product.id)}
                 >
                   -
                 </button>
-                <button type="button" onClick={this.deleteFromCart(product.id)}>
+                <button
+                  type="button"
+                  onClick={() => this.deleteFromCart(product.id)}
+                >
                   Remove From Cart
                 </button>
               </div>
@@ -94,7 +94,10 @@ class GuestShoppingCart extends Component {
               ) : (
                 <div>
                   <div>TOTAL: ${total}</div>
-                  <button type="submit" onClick={this.guestCartCheckout}>
+                  <button
+                    type="submit"
+                    onClick={() => this.guestCartCheckout()}
+                  >
                     Proceed To Checkout
                   </button>
                 </div>
