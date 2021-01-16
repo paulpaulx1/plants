@@ -8,6 +8,7 @@ import SingleProduct from './components/SingleProduct'
 import UserProfile from './components/UserProfile'
 import GuestShoppingCart from './components/GuestShoppingCart'
 import OrderConfirmation from './components/OrderConfirmation'
+import AllUsers from './components/AllUsers'
 
 import {me} from './store'
 
@@ -20,7 +21,9 @@ class Routes extends Component {
   }
 
   render() {
+    console.log('ROUTES----->', this.props)
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
 
     return (
       <Switch>
@@ -36,14 +39,23 @@ class Routes extends Component {
           path="/guest/orderconfirmation"
           component={OrderConfirmation}
         />
+        {isAdmin && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/users" component={AllUsers} />
+          </Switch>
+        )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+            {/* <Route exact path="/users" component={AllUsers} /> */}
           </Switch>
         )}
+
         {/* Displays our Login component as a fallback */}
-        <Route component={AllProducts} />
+        <Route component={Login} />
       </Switch>
     )
   }
@@ -53,10 +65,13 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin
   }
 }
 
