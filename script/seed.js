@@ -9,35 +9,40 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  function generateUsers() {
-    let users = []
+  const users = await Promise.all([
+    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'murphy@email.com', password: '123'})
+  ])
 
-    for (let id = 1; id <= 100; id++) {
-      users.push(
-        User.create({
-          name: faker.name.findName(),
-          email: faker.internet.email(),
-          address:
-            faker.address.streetAddress() +
-            ', ' +
-            faker.address.city() +
-            ', ' +
-            faker.address.stateAbbr() +
-            ', ' +
-            faker.address.zipCode(),
-          password: '123',
-          paymentInfo:
-            faker.finance.creditCardNumber() +
-            ', CVV ' +
-            faker.finance.creditCardCVV()
-        })
-      )
-    }
+  // function generateUsers() {
+  //   let users = []
 
-    return users
-  }
+  //   for (let id = 1; id <= 100; id++) {
+  //     users.push(
+  //       User.create({
+  //         name: faker.name.findName(),
+  //         email: faker.internet.email(),
+  //         address:
+  //           faker.address.streetAddress() +
+  //           ', ' +
+  //           faker.address.city() +
+  //           ', ' +
+  //           faker.address.stateAbbr() +
+  //           ', ' +
+  //           faker.address.zipCode(),
+  //         password: '123',
+  //         paymentInfo:
+  //           faker.finance.creditCardNumber() +
+  //           ', CVV ' +
+  //           faker.finance.creditCardCVV()
+  //       })
+  //     )
+  //   }
 
-  const users = await Promise.all(generateUsers())
+  //   return users
+  // }
+
+  // const users = await Promise.all(generateUsers())
 
   const products = await Promise.all([
     Product.create({

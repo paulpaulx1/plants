@@ -30,23 +30,23 @@ const User = db.define('User', {
   },
   googleId: {
     type: Sequelize.STRING
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  address: {
-    type: Sequelize.STRING
-  },
-  paymentInfo: {
-    type: Sequelize.STRING
-    // validate: {
-    //   isCreditCard: true
-    // }
   }
+  // name: {
+  //   type: Sequelize.STRING,
+  //   // allowNull: false,
+  //   validate: {
+  //     notEmpty: true,
+  //   },
+  // },
+  // address: {
+  //   type: Sequelize.STRING,
+  // },
+  // paymentInfo: {
+  //   type: Sequelize.STRING,
+  //   // validate: {
+  //   //   isCreditCard: true
+  //   // }
+  // },
 })
 
 module.exports = User
