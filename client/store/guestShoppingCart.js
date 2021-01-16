@@ -3,6 +3,7 @@ const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const SUBTRACT_FROM_CART = 'SUBTRACT_FROM_CART'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
+const GUEST_CHECKOUT = 'GUEST_CHECKOUT'
 
 export const setGuestShoppingCart = products => ({
   type: SET_GUEST_SHOPPING_CART,
@@ -24,6 +25,9 @@ export const deleteFromCart = guestCart => ({
   type: DELETE_FROM_CART,
   guestCart
 })
+export const guestCheckout = () => ({
+  type: GUEST_CHECKOUT
+})
 
 export const getGuestShoppingCart = () => {
   return async dispatch => {
@@ -35,7 +39,6 @@ export const getGuestShoppingCart = () => {
     }
   }
 }
-
 export const addingToShoppingCart = product => {
   return dispatch => {
     try {
@@ -59,6 +62,7 @@ export const addingToShoppingCart = product => {
       }
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(addProductToCart(cart))
+      // localStorage.clear()
     } catch (err) {
       console.log(err)
     }
@@ -114,6 +118,19 @@ export const deletingFromCart = productId => {
     }
   }
 }
+export const guestCartCheckout = () => {
+  return dispatch => {
+    try {
+      let cart = []
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+      dispatch(deleteFromCart(cart))
+      // localStorage.clear()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 const initialState = {
   cart: []
 }
@@ -130,6 +147,8 @@ export default function guestShoppingCartReducer(state = initialState, action) {
       return {...state, cart: action.guestCart}
     case DELETE_FROM_CART:
       return {...state, cart: action.guestCart}
+    case GUEST_CHECKOUT:
+      return state
     default:
       return state
   }
