@@ -102,6 +102,7 @@ export const subtractingFromCart = productId => {
     }
   }
 }
+
 export const deletingFromCart = productId => {
   return dispatch => {
     try {
@@ -121,7 +122,6 @@ export const guestCartCheckout = () => {
   return dispatch => {
     try {
       let cart = []
-
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
       dispatch(deleteFromCart(cart))
       // localStorage.clear()
