@@ -6,10 +6,10 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>GRACE SHOPPER</h1>
+    <h1>CRAZY VITO'S HAT EMPORIUM</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="navstuff">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <Link to="/all">All Products</Link>

@@ -53,7 +53,7 @@ class GuestShoppingCart extends Component {
         {products.length === 0 ? (
           <div>Shopping Cart Is Empty</div>
         ) : (
-          <div>
+          <div className="flex-cart">
             {products.map(product => (
               <div key={product.id}>
                 <h4>{product.name}</h4>
