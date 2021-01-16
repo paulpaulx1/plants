@@ -96,7 +96,7 @@ class GuestShoppingCart extends Component {
                       type="submit"
                       onClick={() => this.guestCartCheckout()}
                     >
-                      Proceed To Checkout
+                      Place Your Order
                     </button>
                   </Link>
                 </div>
