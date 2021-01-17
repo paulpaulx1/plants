@@ -139,10 +139,11 @@ async function seed() {
 
   const generateOrders = () => {
     let orders = []
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < users.length; i++) {
       orders.push(
         Order.create({
-          processed: false
+          processed: false,
+          UserId: i + 1
         })
       )
     }
