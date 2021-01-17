@@ -1,5 +1,31 @@
 body {
   font-family: sans-serif;
+  background: linear-gradient(
+    80deg,
+    rgb(216, 129, 59),
+    #d4ef4a,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243),
+    rgb(244, 70, 133, 0.5),
+    rgb(252, 203, 19),
+    #6afc2c,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243)
+  );
+}
+
+.signup {
+  height: 500vh;
+  margin: 1em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(12, 12, 12, 0.6);
+  font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(212, 209, 209, 0.459);
+  font-size: 24px;
+  -webkit-text-stroke: 1px #23430c;
+  text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
+    -1px -1px 0 #23430c;
 }
 a {
   text-decoration: none;
@@ -10,21 +36,40 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(12, 12, 12, 0.6);
+  font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(212, 209, 209, 0.459);
+  font-size: 24px;
+  -webkit-text-stroke: 1px #23430c;
+  text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
+    -1px -1px 0 #23430c;
 }
 form div {
   margin: 1em;
   display: inline-block;
-}
+  margin: 1em;
 
-.cartAddSubtractButton {
+  color: rgba(212, 209, 209, 0);
+  font-size: 18px;
+  -webkit-text-stroke: 1px #0f1809;
+}
+button {
+  background: transparent;
+  color: rgb(0, 0, 0);
   font-size: 20px;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 40px;
 }
 
 .flex-container {
-  /* background-color: #282c34; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: top;
+  font-size: 12px;
+  margin: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,25 +78,79 @@ form div {
   justify-content: center;
   font-size: 12px;
   margin: 20px;
-
-  /* color: white; */
 }
 .flex-cart {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: stretch;
   justify-content: top;
   font-size: 12px;
   margin: 20px;
-  flex: 1;
 }
-.all-h1 {
+/* .single-product {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: top;
+  font-size: 12px;
+  margin: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-content: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 20px;
+  margin: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 3px rgba(83, 82, 82, 0.63) solid;
+  /* margin: 1em;
+  /* display: inline-block; */
+/* margin: 1em;
+
+  color: rgba(212, 209, 209, 0.842);
+  font-size: 18px;
+  -webkit-text-stroke: 1px #0f1809; } */
+
+.navstuff {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(12, 12, 12, 0.6);
+  font-size: 200px;
+}
+.flex-cart button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(12, 12, 12, 0.6);
+
+  border: 3px rgba(83, 82, 82, 0.63) solid;
+
+  margin: 10px;
+  flex: 2;
 }
 
-h1 {
+.flex-cart div {
+  margin: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 3px rgba(83, 82, 82, 0.63) solid;
+}
+
+/* .all-h1 {
+  align-content: center;
+} */
+.toplogo {
+  background: transparent;
   border: 0.5rem outset pink;
   outline: 0.5rem dotted rgb(226, 212, 86);
   text-align: center;
@@ -68,14 +167,41 @@ h1 {
   text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
     -1px -1px 0 #23430c;
 }
+h1 {
+  background: transparent;
+  text-align: center;
+  font: bold 1rem sans-serif;
+  outline-offset: 0.5rem;
+  font-size: 25px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgba(212, 209, 209, 0.425);
+  font-size: 29px;
+  -webkit-text-stroke: 1px #23430c;
+  text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
+    -1px -1px 0 #23430c;
+}
 
 .flex-container div {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: black;
+  color: rgb(0, 0, 0);
   justify-content: center;
+  border: 0.5rem outset rgb(82, 115, 221);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: top;
+  font-size: 20px;
+  padding: 30px;
+  margin: 20px;
+  /* outline: 0.5rem dotted rgb(226, 212, 86); */
 
-  flex: 1;
+  /* flex: 1; */
   /* display: flex;
   flex-direction: column; */
   /* align-content: space-between; */
+}
+/* .single-product */
+.flex-container img {
+  border: 0.5rem outset rgb(82, 115, 221);
 }

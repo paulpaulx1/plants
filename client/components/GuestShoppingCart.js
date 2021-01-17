@@ -50,60 +50,64 @@ class GuestShoppingCart extends Component {
     return (
       <div>
         <h1>Shopping Cart</h1>
-        {products.length === 0 ? (
-          <div>Shopping Cart Is Empty</div>
-        ) : (
-          <div>
-            {products.map(product => (
-              <div key={product.id}>
-                <h4>{product.name}</h4>
-                <img src={product.imageUrl} height="100" />
-                <h4>Quantity: {product.orderQuantity}</h4>
-                <h4>
-                  Price: $
-                  {this.roundDecimal(product.price * product.orderQuantity)}
-                </h4>
-                <button
-                  className="cartAddSubtractButton"
-                  type="button"
-                  onClick={() => this.addToCart(product.id)}
-                >
-                  +
-                </button>
-                <button
-                  className="cartAddSubtractButton"
-                  type="button"
-                  onClick={() => this.subtractFromCart(product.id)}
-                >
-                  -
-                </button>
-                <button
-                  type="button"
-                  onClick={() => this.deleteFromCart(product.id)}
-                >
-                  Remove From Cart
-                </button>
-              </div>
-            ))}
-            <div>
-              {products === null ? (
-                <div>Shopping Cart Is Empty</div>
-              ) : (
-                <div>
-                  <div>TOTAL: ${total}</div>
-                  <Link to="/guest/orderconfirmation">
+        <div className="cart-things">
+          {products.length === 0 ? (
+            <div>Shopping Cart Is Empty</div>
+          ) : (
+            <div className="flex-cart">
+              {products.map(product => (
+                <div key={product.id}>
+                  <h4>{product.name}</h4>
+                  <img src={product.imageUrl} height="185" />
+                  <h4>Quantity: {product.orderQuantity}</h4>
+                  <h4>
+                    Price: $
+                    {this.roundDecimal(product.price * product.orderQuantity)}
+                  </h4>
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.addToCart(product.id)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.subtractFromCart(product.id)}
+                  >
+                    -
+                  </button>
+                  <div>
                     <button
-                      type="submit"
-                      onClick={() => this.guestCartCheckout()}
+                      type="button"
+                      onClick={() => this.deleteFromCart(product.id)}
                     >
-                      Place Your Order
+                      Remove From Cart
                     </button>
-                  </Link>
+                  </div>
                 </div>
-              )}
+              ))}
+              <div>
+                {products === null ? (
+                  <div>Shopping Cart Is Empty</div>
+                ) : (
+                  <div>
+                    <div>TOTAL: ${total}</div>
+                    <Link to="/guest/orderconfirmation">
+                      <button
+                        type="submit"
+                        onClick={() => this.guestCartCheckout()}
+                      >
+                        Place Your Order
+                      </button>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     )
   }
