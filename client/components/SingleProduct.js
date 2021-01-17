@@ -23,18 +23,19 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    let styleObj = {fontSize: '18px'}
     if (this.state.dataLoaded === true) {
       const product = this.props.product.single
       console.log(product)
 
       return (
-        <header className="flex-container">
+        <header>
           <span className="single-product">
-            <div> {product.name}</div>
-            <img src={product.imageUrl} height="404" />
-            <div>Price: {product.price}</div>
-            <div>Description: {product.description}</div>
+            <img src={product.imageUrl} height="300" />
+            <div className="single-column">
+              <div> {product.name}</div>
+              <div>Price: {product.price}</div>
+              <div>{product.description}</div>
+            </div>
             <button
               style={{fontSize: '16px', background: 'transparent'}}
               type="submit"
