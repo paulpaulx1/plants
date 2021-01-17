@@ -14,7 +14,7 @@ export class AllProducts extends React.Component {
       <header className="flex-container">
         <span>
           {' '}
-          <h1 className="all-h1">All Products</h1>
+          <h1 className="all-h1">All Hats</h1>
           <div>
             {products.map(product => (
               <div key={product.id}>

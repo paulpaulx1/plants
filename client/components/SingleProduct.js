@@ -30,11 +30,11 @@ export class SingleProduct extends React.Component {
 
       return (
         <header className="flex-container">
-          <span>
-            <div style={styleObj}>{product.name}</div>
+          <span className="single-product">
+            <div> {product.name}</div>
             <img src={product.imageUrl} height="404" />
-            <div style={styleObj}>Price: {product.price}</div>
-            <div style={styleObj}>Description: {product.description}</div>
+            <div>Price: {product.price}</div>
+            <div>Description: {product.description}</div>
             <button
               style={{fontSize: '16px', background: 'transparent'}}
               type="submit"
