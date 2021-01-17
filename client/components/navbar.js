@@ -5,15 +5,15 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1 className="toplogo">CRAZY VITO'S HAT EMPORIUM</h1>
+  <div className="theNavBar">
+    <h1 className="toplogo">CRAZY VITO'S NOVELTY HAT EMPORIUM</h1>
     <nav>
       {isLoggedIn ? (
         <div className="navstuff">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <Link to="/all">Novelty Hats</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Log In</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/guest/shoppingcart">
             <i className="fa fa-shopping-cart" id="nav-cart" />
@@ -26,7 +26,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/all">Novelty Hats</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Log In</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/guest/shoppingcart">
             <i className="fa fa-shopping-cart" id="nav-cart" />

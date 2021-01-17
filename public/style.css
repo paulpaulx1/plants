@@ -1,5 +1,4 @@
-body {
-  font-family: sans-serif;
+/* * {
   background: linear-gradient(
     80deg,
     rgb(216, 129, 59),
@@ -10,8 +9,11 @@ body {
     rgb(252, 203, 19),
     #6afc2c,
     rgba(191, 99, 164, 0.96),
-    rgb(16, 95, 243)
-  );
+    rgb(16, 95, 243))
+} */
+body {
+  font-family: sans-serif;
+  background: rgb(187, 208, 223);
 }
 
 .signup {
@@ -33,6 +35,9 @@ a {
 label {
   display: block;
 }
+.confirmation {
+  border: 3px rgba(83, 82, 82, 0.377) solid;
+}
 nav a {
   display: inline-block;
   margin: 1em;
@@ -45,6 +50,18 @@ nav a {
   -webkit-text-stroke: 1px #23430c;
   text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
     -1px -1px 0 #23430c;
+  /* background: linear-gradient(
+      80deg,
+      rgb(216, 129, 59),
+      #d4ef4a,
+      rgba(191, 99, 164, 0.96),
+      rgb(16, 95, 243),
+      rgb(244, 70, 133, 0.5),
+      rgb(252, 203, 19),
+      #6afc2c,
+      rgba(191, 99, 164, 0.96),
+      rgb(16, 95, 243));
+      border: 3px rgba(83, 82, 82, 0.63) solid; */
 }
 form div {
   margin: 1em;
@@ -54,6 +71,25 @@ form div {
   color: rgba(212, 209, 209, 0);
   font-size: 18px;
   -webkit-text-stroke: 1px #0f1809;
+}
+/* .theNavBar {
+  background:rgb(112, 106, 106)
+} */
+#nav-cart {
+  background: linear-gradient(
+    80deg,
+    rgb(216, 129, 59),
+    #d4ef4a,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243),
+    rgb(244, 70, 133, 0.5),
+    rgb(252, 203, 19),
+    #6afc2c,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243)
+  );
+  border: 3px rgba(83, 82, 82, 0.63) solid;
+  size: 100px;
 }
 button {
   background: transparent;
@@ -78,6 +114,9 @@ button {
   justify-content: center;
   font-size: 12px;
   margin: 20px;
+  color: rgba(212, 209, 209, 0);
+  font-size: 18px;
+  -webkit-text-stroke: 1px #0f1809;
 }
 .flex-cart {
   min-height: 100vh;
@@ -88,6 +127,10 @@ button {
   justify-content: top;
   font-size: 12px;
   margin: 20px;
+  border: 3px rgba(83, 82, 82, 0.425) solid;
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 18px;
+  -webkit-text-stroke: 2px #898b866e;
 }
 /* .single-product {
   min-height: 100vh;
@@ -128,6 +171,18 @@ button {
 }
 
 .flex-cart div {
+  background: linear-gradient(
+    160deg,
+    rgb(216, 129, 59),
+    #d4ef4a,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243),
+    rgb(244, 70, 133, 0.5),
+    rgb(252, 203, 19),
+    #6afc2c,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243)
+  );
   margin: 10px;
   padding: 10px;
   align-content: center;
@@ -135,13 +190,28 @@ button {
   display: flex;
   flex-direction: column;
   border: 3px rgba(83, 82, 82, 0.63) solid;
+  border: 3px rgba(83, 82, 82, 0.425) solid;
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 18px;
+  -webkit-text-stroke: 2px #898b866e;
 }
 
 /* .all-h1 {
   align-content: center;
 } */
 .toplogo {
-  background: transparent;
+  background: linear-gradient(
+    169deg,
+    rgb(216, 129, 59),
+    #d4ef4a,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243),
+    rgb(244, 70, 133, 0.5),
+    rgb(252, 203, 19),
+    #6afc2c,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243)
+  );
   border: 0.5rem outset pink;
   outline: 0.5rem dotted rgb(226, 212, 86);
   text-align: center;
@@ -173,10 +243,22 @@ h1 {
 }
 
 .flex-container div {
+  background: linear-gradient(
+    160deg,
+    rgb(216, 129, 59),
+    #d4ef4a,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243),
+    rgb(244, 70, 133, 0.5),
+    rgb(252, 203, 19),
+    #6afc2c,
+    rgba(191, 99, 164, 0.96),
+    rgb(16, 95, 243)
+  );
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: rgb(0, 0, 0);
   justify-content: center;
-  border: 0.5rem outset rgb(82, 115, 221);
+  border: 0.5rem outset rgb(93, 100, 122);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -185,6 +267,10 @@ h1 {
   font-size: 20px;
   padding: 30px;
   margin: 20px;
+  /* border: 3px rgba(83, 82, 82, 0.425) solid; */
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 24px;
+  -webkit-text-stroke: 2px #898b866e;
   /* outline: 0.5rem dotted rgb(226, 212, 86); */
 
   /* flex: 1; */
@@ -211,17 +297,47 @@ h1 {
 .single-product div {
   display: flex;
   flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* border: 3px rgba(83, 82, 82, 0.63) solid; */
   /* flex: 1; */
 }
 .single-product .single-column {
   display: flex;
   flex-direction: column;
   border: solid rgb(0, 0, 0, 0);
-}
-.single-product .single-column button {
+  margin: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
+  border: 3px rgba(83, 82, 82, 0.425) solid;
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 24px;
+  -webkit-text-stroke: 2px #898b866e;
+  /* border: 3px rgba(83, 82, 82, 0.63) solid; */
+}
+.single-product button {
+  /* display: flex; */
+  flex-direction: column;
   border: solid rgb(0, 0, 0, 0);
+  margin: 10px;
+  padding: 10px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 3px rgba(83, 82, 82, 0.425) solid;
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 24px;
+  -webkit-text-stroke: 2px #898b866e;
+  /* text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
+    -1px -1px 0 #23430c; */
 }
 .flex-cart button {
   display: flex;
@@ -231,5 +347,23 @@ h1 {
   border: 3px rgba(83, 82, 82, 0.63) solid;
 
   margin: 10px;
+  border: 3px rgba(83, 82, 82, 0.425) solid;
+  color: rgba(rgba(139, 122, 122, 0.425));
+  font-size: 18px;
+  -webkit-text-stroke: 2px #898b866e;
   /* flex: 2; */
 }
+
+a:visited {
+  color: rgba(138, 133, 133, 0.849);
+  font-size: 29px;
+  -webkit-text-stroke: 1px #23430c;
+  /* text-shadow: -1px 1px 2px #2e3826, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
+    -1px -1px 0 #23430c;} */
+}
+a:hover {
+  color: #ff00ff;
+} /* Mouse over link */
+a:active {
+  color: #0000ff;
+} /* Selected link   */

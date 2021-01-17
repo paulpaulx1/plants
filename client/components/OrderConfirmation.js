@@ -2,9 +2,9 @@ import React from 'react'
 
 const OrderConfirmationPage = () => {
   return (
-    <div>
+    <div className="confirmation">
       <h1>Your Order Is Confirmed.</h1>
-      <h2>Thank You For Choosing Crazy Vito's Hat Emporium!</h2>
+      <h1>Thank You For Choosing Crazy Vito's Novelty Hat Emporium!</h1>
     </div>
   )
 }

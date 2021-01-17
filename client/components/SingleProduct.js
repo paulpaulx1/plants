@@ -11,10 +11,6 @@ export class SingleProduct extends React.Component {
     }
   }
 
-  addProductToCart = async () => {
-    //this will put 1 of the item into our shopping cart
-  }
-
   componentDidMount() {
     if (this.props.match) {
       this.props.fetchProduct(this.props.match.params.id)
@@ -33,7 +29,7 @@ export class SingleProduct extends React.Component {
             <img src={product.imageUrl} height="300" />
             <div className="single-column">
               <div> {product.name}</div>
-              <div>Price: {product.price}</div>
+              <div>{product.price}</div>
               <div>{product.description}</div>
             </div>
             <button

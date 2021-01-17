@@ -64,6 +64,7 @@ class GuestShoppingCart extends Component {
                     Price: $
                     {this.roundDecimal(product.price * product.orderQuantity)}
                   </h4>
+
                   <button
                     className="cartAddSubtractButton"
                     type="button"
@@ -78,19 +79,20 @@ class GuestShoppingCart extends Component {
                   >
                     -
                   </button>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => this.deleteFromCart(product.id)}
-                    >
-                      Remove From Cart
-                    </button>
-                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => this.deleteFromCart(product.id)}
+                  >
+                    Remove From Cart
+                  </button>
                 </div>
               ))}
               <div>
                 {products === null ? (
-                  <div>Shopping Cart Is Empty</div>
+                  <div className="flex-cart">
+                    <div>Shopping Cart Is Empty</div>
+                  </div>
                 ) : (
                   <div>
                     <div>TOTAL: ${total}</div>
