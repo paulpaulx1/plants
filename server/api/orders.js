@@ -17,7 +17,7 @@ router.get('/:id/cart', async (req, res, next) => {
     })
     if (cartItems.length === 0) {
       const error = new Error('API Cart Is Empty')
-      next(error)
+      // next(error)
     } else {
       res.json(cartItems)
     }
@@ -28,6 +28,7 @@ router.get('/:id/cart', async (req, res, next) => {
 
 //ensure it remains as put, increases and decreases quantity inside cart
 router.put('/:id/cart/:action', async function(req, res, next) {
+  console.log('ACTION----->', req.params.action)
   try {
     const ProductId = req.body.ProductId
     const OrderId = req.body.OrderId
@@ -37,10 +38,10 @@ router.put('/:id/cart/:action', async function(req, res, next) {
         OrderId: OrderId
       }
     })
-    if (req.params.action === 'increment') {
+    if (req.params.action === 'add') {
       await orderItem.increment('quantity')
     }
-    if (req.params.action === 'decrement') {
+    if (req.params.action === 'remove') {
       await orderItem.decrement('quantity')
     }
     res.json(orderItem)
