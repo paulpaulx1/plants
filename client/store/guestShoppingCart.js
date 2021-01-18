@@ -50,11 +50,11 @@ export const addingToShoppingCart = product => {
           cart.push(product)
         } else {
           // if product is in the cart...loop through to increase quantity
-          for (let i = 0; i < cart.length; i++) {
-            if (product.id === cart[i].id) {
-              cart[i].orderQuantity++
-            }
-          }
+          // for (let i = 0; i < cart.length; i++) {
+          //   if (product.id === cart[i].id) {
+          //     cart[i].orderQuantity++
+          //   }
+          // }
         }
       } else {
         cart = []
