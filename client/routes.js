@@ -10,6 +10,7 @@ import UserProfile from './components/UserProfile'
 import GuestShoppingCart from './components/GuestShoppingCart'
 import OrderConfirmation from './components/OrderConfirmation'
 import AllUsers from './components/AllUsers'
+import UserShoppingCart from './components/UserShoppingCart'
 
 import {me} from './store'
 
@@ -22,7 +23,6 @@ class Routes extends Component {
   }
 
   render() {
-    console.log('ROUTES----->', this.props)
     const {isLoggedIn} = this.props
     const {isAdmin} = this.props
 
@@ -31,27 +31,48 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/all" component={AllProducts} />
         <Route exact path="/product/:id" component={SingleProduct} />
-        <Route exact path="/user/:id" component={UserProfile} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/guest/shoppingcart" component={GuestShoppingCart} />
-        <Route
-          exact
-          path="/guest/orderconfirmation"
-          component={OrderConfirmation}
-        />
+        <Route exact path="/orderconfirmation" component={OrderConfirmation} />
         {isAdmin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/admin" component={AdminDashboard} />
+            <Route exact path="/all" component={AllProducts} />
+            <Route exact path="/product/:id" component={SingleProduct} />
+            <Route exact path="/user/:id" component={UserProfile} />
+            <Route
+              exact
+              path="/user/:id/shoppingcart"
+              component={UserShoppingCart}
+            />
+            <Route
+              exact
+              path="/orderconfirmation"
+              component={OrderConfirmation}
+            />
           </Switch>
         )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+            <Route exact path="/all" component={AllProducts} />
+            <Route exact path="/product/:id" component={SingleProduct} />
+            <Route exact path="/user/:id" component={UserProfile} />
+            <Route
+              exact
+              path="/user/:id/shoppingcart"
+              component={UserShoppingCart}
+            />
+            <Route
+              exact
+              path="/orderconfirmation"
+              component={OrderConfirmation}
+            />
             {/* <Route exact path="/users" component={AllUsers} /> */}
           </Switch>
         )}
@@ -67,7 +88,6 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
