@@ -330,3 +330,7 @@ a:hover {
 a:active {
   color: #0000ff;
 } /* Selected link   */
+.admin-dash {
+  font-family: sans-serif;
+  color: black;
+}
