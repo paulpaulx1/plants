@@ -46,7 +46,7 @@ class GuestShoppingCart extends Component {
       .toFixed(2)
 
     return (
-      <div>
+      <>
         <h1>Shopping Cart</h1>
         <div className="cart-things">
           {products.length === 0 ? (
@@ -62,6 +62,7 @@ class GuestShoppingCart extends Component {
                     Price: $
                     {this.roundDecimal(product.price)}
                   </h4>
+
                   <button
                     className="cartAddSubtractButton"
                     type="button"
@@ -76,19 +77,21 @@ class GuestShoppingCart extends Component {
                   >
                     -
                   </button>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => this.deleteFromCart(product.id)}
-                    >
-                      Remove From Cart
-                    </button>
-                  </div>
+
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.deleteFromCart(product.id)}
+                  >
+                    Remove From Cart
+                  </button>
                 </div>
               ))}
               <div>
                 {products === null ? (
-                  <div>Shopping Cart Is Empty</div>
+                  <div className="flex-cart">
+                    <div>Shopping Cart Is Empty</div>
+                  </div>
                 ) : (
                   <div>
                     <div>TOTAL: ${total}</div>
@@ -106,7 +109,7 @@ class GuestShoppingCart extends Component {
             </div>
           )}
         </div>
-      </div>
+      </>
     )
   }
 }

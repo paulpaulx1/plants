@@ -20,12 +20,13 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+
     const product = this.props.product.single
     const userId = this.props.userId
 
     if (this.state.dataLoaded === true) {
       return (
-        <header className="flex-container">
+        <header>
           <span className="single-product">
             <div> {product.name}</div>
             <img src={product.imageUrl} height="404" />
