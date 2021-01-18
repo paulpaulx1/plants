@@ -48,7 +48,7 @@ class GuestShoppingCart extends Component {
       .toFixed(2)
 
     return (
-      <div>
+      <>
         <h1>Shopping Cart</h1>
         <div className="cart-things">
           {products.length === 0 ? (
@@ -81,6 +81,7 @@ class GuestShoppingCart extends Component {
                   </button>
 
                   <button
+                    className="cartAddSubtractButton"
                     type="button"
                     onClick={() => this.deleteFromCart(product.id)}
                   >
@@ -110,7 +111,7 @@ class GuestShoppingCart extends Component {
             </div>
           )}
         </div>
-      </div>
+      </>
     )
   }
 }

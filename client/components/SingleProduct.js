@@ -29,7 +29,7 @@ export class SingleProduct extends React.Component {
             <img src={product.imageUrl} height="300" />
             <div className="single-column">
               <div> {product.name}</div>
-              <div>{product.price}</div>
+              <div id="singleprice">${product.price}</div>
               <div>{product.description}</div>
             </div>
             <button
