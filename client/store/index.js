@@ -8,6 +8,7 @@ import allProductsReducer from './allProducts'
 import userProfile from './userprofile'
 import orderHistoryReducer from './orderHistory'
 import guestShoppingCartReducer from './guestShoppingCart'
+import userShoppingCartReducer from './userShoppingCart'
 import allUsers from './allUsers'
 
 const reducer = combineReducers({
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   userProfile,
   orderHistoryReducer,
   guestShoppingCartReducer,
+  userShoppingCartReducer,
   allUsers
 })
 
