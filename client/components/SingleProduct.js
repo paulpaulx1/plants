@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/singleproduct.js'
 import {addingToShoppingCart} from '../store/guestShoppingCart'
+import {addingToUserShoppingCart} from '../store/userShoppingCart'
 
 export class SingleProduct extends React.Component {
   constructor() {
@@ -9,10 +10,6 @@ export class SingleProduct extends React.Component {
     this.state = {
       dataLoaded: false
     }
-  }
-
-  addProductToCart = async () => {
-    //this will put 1 of the item into our shopping cart
   }
 
   componentDidMount() {
@@ -23,11 +20,10 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    let styleObj = {fontSize: '18px'}
-    if (this.state.dataLoaded === true) {
-      const product = this.props.product.single
-      console.log(product)
+    const product = this.props.product.single
+    const userId = this.props.userId
 
+    if (this.state.dataLoaded === true) {
       return (
         <header className="flex-container">
           <span className="single-product">
@@ -35,13 +31,25 @@ export class SingleProduct extends React.Component {
             <img src={product.imageUrl} height="404" />
             <div>Price: {product.price}</div>
             <div>Description: {product.description}</div>
-            <button
-              style={{fontSize: '16px', background: 'transparent'}}
-              type="submit"
-              onClick={() => this.props.addProductToGuestCart(product)}
-            >
-              Add to cart
-            </button>
+            {userId === undefined ? (
+              <button
+                style={{fontSize: '16px', background: 'transparent'}}
+                type="submit"
+                onClick={() => this.props.addProductToGuestCart(product)}
+              >
+                Add to cart
+              </button>
+            ) : (
+              <button
+                style={{fontSize: '16px', background: 'transparent'}}
+                type="submit"
+                onClick={() =>
+                  this.props.addProductToUserCart(product.id, userId)
+                }
+              >
+                Add to cart
+              </button>
+            )}
           </span>
         </header>
       )
@@ -53,14 +61,17 @@ export class SingleProduct extends React.Component {
 
 const mapState = state => {
   return {
-    product: state.productReducer
+    product: state.productReducer,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     fetchProduct: id => dispatch(fetchProduct(id)),
-    addProductToGuestCart: product => dispatch(addingToShoppingCart(product))
+    addProductToGuestCart: product => dispatch(addingToShoppingCart(product)),
+    addProductToUserCart: (ProductId, UserId) =>
+      dispatch(addingToUserShoppingCart(ProductId, UserId))
   }
 }
 

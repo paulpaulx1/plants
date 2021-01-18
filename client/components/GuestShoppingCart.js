@@ -38,8 +38,6 @@ class GuestShoppingCart extends Component {
     return Number(num).toFixed(2)
   }
 
-  //Need to link to confirmation page!
-
   render() {
     const products = this.props.products
 
@@ -62,7 +60,7 @@ class GuestShoppingCart extends Component {
                   <h4>Quantity: {product.orderQuantity}</h4>
                   <h4>
                     Price: $
-                    {this.roundDecimal(product.price * product.orderQuantity)}
+                    {this.roundDecimal(product.price)}
                   </h4>
                   <button
                     className="cartAddSubtractButton"
@@ -94,7 +92,7 @@ class GuestShoppingCart extends Component {
                 ) : (
                   <div>
                     <div>TOTAL: ${total}</div>
-                    <Link to="/guest/orderconfirmation">
+                    <Link to="/orderconfirmation">
                       <button
                         type="submit"
                         onClick={() => this.guestCartCheckout()}
