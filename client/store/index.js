@@ -10,6 +10,7 @@ import orderHistoryReducer from './orderHistory'
 import guestShoppingCartReducer from './guestShoppingCart'
 import userShoppingCartReducer from './userShoppingCart'
 import allUsers from './allUsers'
+import dashboardReducer from './adminDashboard'
 
 const reducer = combineReducers({
   user,
@@ -18,8 +19,9 @@ const reducer = combineReducers({
   userProfile,
   orderHistoryReducer,
   guestShoppingCartReducer,
-  userShoppingCartReducer,
-  allUsers
+  allUsers,
+  dashboardReducer
+  userShoppingCartReducer
 })
 
 const middleware = composeWithDevTools(

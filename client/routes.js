@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
+import AdminDashboard from './components/AdminDashboard'
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
 import UserProfile from './components/UserProfile'
@@ -39,6 +40,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/admin" component={AdminDashboard} />
             <Route exact path="/all" component={AllProducts} />
             <Route exact path="/product/:id" component={SingleProduct} />
             <Route exact path="/user/:id" component={UserProfile} />
