@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/allProducts'
-import {createProduct, deleteProduct} from '../store/adminDashboard'
+import {
+  createProduct,
+  deleteProduct,
+  updateProduct
+} from '../store/adminDashboard'
 import {Link} from 'react-router-dom'
 import {setProduct} from '../store/singleProduct'
 import axios from 'axios'
@@ -23,7 +27,7 @@ export class AdminDashboard extends React.Component {
 
   render() {
     const {products} = this.props
-    console.log('props======>', this.props)
+    // console.log('props======>', this.props)
     return (
       <header className="admin-dash">
         <span>
@@ -42,26 +46,103 @@ export class AdminDashboard extends React.Component {
 
                   <>{product.name}</>
                   <label htmlFor={product.name} />
-                  <small>Change Name</small>
-                  <input name={product.name} type="text" />
+                  <button
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        name: this.state.name
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Name ===
+                  </button>
+                  <input
+                    name={product.name}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({name: evt.target.value})
+                    }}
+                  />
                   <br />
+
                   <>{(product.price * 1).toFixed(2)}</>
                   <label htmlFor={product.price} />
-                  <small>Change Price</small>
-                  <input name={product.price} type="text" />
+                  <button
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        price: this.state.price
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Price ===
+                  </button>
+                  <input
+                    name={product.price}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({price: evt.target.value})
+                    }}
+                  />
+
                   <br />
                   <>{product.imageUrl}</>
                   <br />
-
-                  <small>Change Image URL</small>
                   <label htmlFor={product.imageUrl} />
-                  <input name={product.imageUrl} type="text" />
                   <button
                     type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        imageUrl: this.state.imageUrl
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Image URL ===
+                  </button>
+
+                  <input
+                    name={product.imageUrl}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({imageUrl: evt.target.value})
+                    }}
+                  />
+                  <br />
+                  <button
+                    type="button"
                     onClick={() => this.props.deletingProduct(product)}
                   >
                     DELETE {product.name}
                   </button>
+                  <br />
+                  <>======================</>
                 </>
               </form>
             ))}
@@ -153,7 +234,8 @@ const mapDispatch = dispatch => {
     fetchProducts: () => dispatch(fetchProducts()),
     deletingProduct: product => {
       dispatch(deleteProduct(product))
-    }
+    },
+    updatingProduct: product => dispatch(updateProduct(product))
   }
 }
 

@@ -40,11 +40,12 @@ export const updatingProduct = product => {
   }
 }
 
-export const updateProduct = (product, history) => {
+export const updateProduct = product => {
   return async dispatch => {
-    const updated = await axios.put(`/api/products/${product.id}`)
+    const updated = await axios.put(`/api/products/${product.id}`, product).data
     dispatch(updatingProduct(updated))
-    history.push('/')
+    console.log('updated', updated)
+    // history.push('/')
   }
 }
 
@@ -57,8 +58,9 @@ const initialState = {
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_PRODUCT:
+      console.log('yoooooooo', action.product)
       return {
-        state,
+        ...state,
         all: state.all.map(
           product =>
             product.id === action.product.id ? action.product : product
