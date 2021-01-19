@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-
 const Navbar = ({handleClick, isLoggedIn, userId}) => (
   <div>
     <h1 className="toplogo">CRAZY VITO'S HAT EMPORIUM</h1>
@@ -14,6 +13,7 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => (
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <Link to="/all">Novelty Hats</Link>
+          <Link to={`/user/${userId}/orderhistory`}>Order History</Link>
           <Link to={`/user/${userId}/shoppingcart`}>
             <i className="fa fa-shopping-cart" id="nav-cart" />
           </Link>
