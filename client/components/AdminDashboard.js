@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/allProducts'
-import {createProduct} from '../store/adminDashboard'
+import {
+  createProduct,
+  deleteProduct,
+  updateProduct
+} from '../store/adminDashboard'
 import {Link} from 'react-router-dom'
 import {setProduct} from '../store/singleProduct'
 import axios from 'axios'
@@ -16,38 +20,14 @@ export class AdminDashboard extends React.Component {
       imageUrl: '',
       brand: ''
     }
-    // this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
     this.props.fetchProducts()
-    console.log('thankk thunk thunk', this.props.creatingProduct)
   }
-
-  //   handleSubmit(evt) {
-  //     evt.preventDefault()
-  //     console.log(evt.target)
-  //     console.log(this.props.creatingProduct)
-  //     console.log(this.props)
-  //     const formName = this.state.name
-  //     const price = this.state.price
-  //     const email = this.state.email
-  //     const description = this.state.description
-  //     const imageUrl = this.state.imageUrl
-  //     const brand = this.state.brand
-  //     this.props.creatingProduct(formName, price, email, description, imageUrl, brand)
-  //   }
-  //   handleChange(evt) {
-  //     this.setState({
-  //       [evt.target.name]: evt.target.value
-  //     })
-  //   }
 
   render() {
     const {products} = this.props
-    console.log('=============>', this.props)
-    // const { name, description, brand, imageUrl, price } = this.state
-
+    // console.log('props======>', this.props)
     return (
       <header className="admin-dash">
         <span>
@@ -66,20 +46,103 @@ export class AdminDashboard extends React.Component {
 
                   <>{product.name}</>
                   <label htmlFor={product.name} />
-                  <small>Change Name</small>
-                  <input name={product.name} type="text" />
+                  <button
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        name: this.state.name
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Name ===
+                  </button>
+                  <input
+                    name={product.name}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({name: evt.target.value})
+                    }}
+                  />
                   <br />
+
                   <>{(product.price * 1).toFixed(2)}</>
                   <label htmlFor={product.price} />
-                  <small>Change Price</small>
-                  <input name={product.price} type="text" />
+                  <button
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        price: this.state.price
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Price ===
+                  </button>
+                  <input
+                    name={product.price}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({price: evt.target.value})
+                    }}
+                  />
+
                   <br />
                   <>{product.imageUrl}</>
                   <br />
-
-                  <small>Change Image URL</small>
                   <label htmlFor={product.imageUrl} />
-                  <input name={product.imageUrl} type="text" />
+                  <button
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      this.props.updatingProduct({
+                        ...product,
+                        imageUrl: this.state.imageUrl
+                      })
+                      this.setState({
+                        name: '',
+                        price: '',
+                        description: '',
+                        imageUrl: '',
+                        brand: ''
+                      })
+                    }}
+                  >
+                    Change Image URL ===
+                  </button>
+
+                  <input
+                    name={product.imageUrl}
+                    type="text"
+                    onChange={evt => {
+                      this.setState({imageUrl: evt.target.value})
+                    }}
+                  />
+                  <br />
+                  <button
+                    type="button"
+                    onClick={() => this.props.deletingProduct(product)}
+                  >
+                    DELETE {product.name}
+                  </button>
+                  <br />
+                  <>======================</>
                 </>
               </form>
             ))}
@@ -168,22 +231,11 @@ const mapDispatch = dispatch => {
     creatingProduct: product => {
       dispatch(createProduct(product))
     },
-    fetchProducts: () => dispatch(fetchProducts())
-  }
-}
-
-// },
-// updateProduct: () => {
-//   dispatch(updateProduct())
-// },
-
-const productCreator = product => async dispatch => {
-  let res
-  try {
-    res = await axios.post(`/api/products`, product)
-    dispatch(setProduct(res.data))
-  } catch (error) {
-    return error
+    fetchProducts: () => dispatch(fetchProducts()),
+    deletingProduct: product => {
+      dispatch(deleteProduct(product))
+    },
+    updatingProduct: product => dispatch(updateProduct(product))
   }
 }
 

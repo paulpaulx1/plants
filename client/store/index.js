@@ -20,7 +20,7 @@ const reducer = combineReducers({
   orderHistoryReducer,
   guestShoppingCartReducer,
   allUsers,
-  dashboardReducer
+  dashboardReducer,
   userShoppingCartReducer
 })
 
