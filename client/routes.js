@@ -11,6 +11,7 @@ import GuestShoppingCart from './components/GuestShoppingCart'
 import OrderConfirmation from './components/OrderConfirmation'
 import AllUsers from './components/AllUsers'
 import UserShoppingCart from './components/UserShoppingCart'
+import OrderHistory from './components/OrderHistory'
 
 import {me} from './store'
 
@@ -29,6 +30,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={AllProducts} />
         <Route exact path="/all" component={AllProducts} />
         <Route exact path="/product/:id" component={SingleProduct} />
         <Route exact path="/login" component={Login} />
@@ -46,6 +48,11 @@ class Routes extends Component {
             <Route exact path="/user/:id" component={UserProfile} />
             <Route
               exact
+              path="/user/:id/orderhistory"
+              component={OrderHistory}
+            />
+            <Route
+              exact
               path="/user/:id/shoppingcart"
               component={UserShoppingCart}
             />
@@ -59,10 +66,16 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            <Route exact path="/" component={AllProducts} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/all" component={AllProducts} />
             <Route exact path="/product/:id" component={SingleProduct} />
             <Route exact path="/user/:id" component={UserProfile} />
+            <Route
+              exact
+              path="/user/:id/orderhistory"
+              component={OrderHistory}
+            />
             <Route
               exact
               path="/user/:id/shoppingcart"
