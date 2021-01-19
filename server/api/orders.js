@@ -55,10 +55,12 @@ router.post('/:id/cart', async (req, res, next) => {
   //ensure that front-end has proper naming convention for quantity being sent as "quantity"
   try {
     const currentProduct = await Product.findByPk(req.body.ProductId)
-    const currentOrder = await Order.findOne({
+    console.log(currentProduct)
+    const currentOrder = await Order.findOrCreate({
       where: {UserId: req.params.id, processed: false}
     })
-    await currentOrder.addProduct(currentProduct)
+    console.log(currentOrder)
+    await currentOrder[0].addProduct(currentProduct)
 
     const newProduct = await Product.findByPk(req.body.ProductId, {
       include: {
@@ -68,7 +70,7 @@ router.post('/:id/cart', async (req, res, next) => {
     const orderItem = await OrderHistory.findOne({
       where: {
         ProductId: req.body.ProductId,
-        OrderId: currentOrder.id
+        OrderId: currentOrder[0].id
       }
     })
     if (req.body.quantity) {
