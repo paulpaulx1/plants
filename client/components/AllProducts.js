@@ -14,14 +14,14 @@ export class AllProducts extends React.Component {
       <header className="flex-container">
         <span>
           {' '}
-          <h1 className="all-h1">All Hats</h1>
+          <h1>All Hats</h1>
           <div>
             {products.map(product => (
               <div key={product.id}>
                 <Link to={`/product/${product.id}`}>
-                  <h4>{product.name}</h4>
-                  <h4>{(product.price * 1).toFixed(2)}</h4>
-                  <img src={product.imageUrl} height="300" />
+                  <h4 id="allproducttext">{product.name}</h4>
+                  <h4 id="allproducttext">{(product.price * 1).toFixed(2)}</h4>
+                  <img src={product.imageUrl} height="250" />
                 </Link>
               </div>
             ))}
