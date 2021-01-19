@@ -1,11 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/allProducts'
+import {adminFetchProducts} from '../store/adminDashBoard'
 import {
   createProduct,
   deleteProduct,
   updateProduct
 } from '../store/adminDashboard'
+
+import {addProduct} from '../store/allProducts'
+
 import {Link} from 'react-router-dom'
 import {setProduct} from '../store/singleProduct'
 import axios from 'axios'
@@ -21,9 +24,15 @@ export class AdminDashboard extends React.Component {
       brand: ''
     }
   }
+
   componentDidMount() {
-    this.props.fetchProducts()
+    this.props.adminFetchProducts()
   }
+
+  //   componentDidUpdate(prevProps, prevState) {
+
+  //      this.forceUpdate()
+  //       }
 
   render() {
     const {products} = this.props
@@ -78,9 +87,9 @@ export class AdminDashboard extends React.Component {
                   <label htmlFor={product.price} />
                   <button
                     type="submit"
-                    onClick={evt => {
+                    onClick={async evt => {
                       evt.preventDefault()
-                      this.props.updatingProduct({
+                      await this.props.updatingProduct({
                         ...product,
                         price: this.state.price
                       })
@@ -91,6 +100,7 @@ export class AdminDashboard extends React.Component {
                         imageUrl: '',
                         brand: ''
                       })
+                      console.log(state.dashboardReducer.all)
                     }}
                   >
                     Change Price ===
@@ -157,7 +167,7 @@ export class AdminDashboard extends React.Component {
               }}
               name="name"
               type="text"
-              value={this.state.name}
+              //   value={this.state.name}
             />
             <label htmlFor="newprice" />
             <small>Price:</small>
@@ -167,7 +177,7 @@ export class AdminDashboard extends React.Component {
               }}
               name="price"
               type="text"
-              value={this.state.price}
+              //   value={this.state.price}
             />
             <label htmlFor="description" />
             <small>Description:</small>
@@ -177,7 +187,7 @@ export class AdminDashboard extends React.Component {
               }}
               name="description"
               type="text"
-              value={this.state.description}
+              //   value={this.state.description}
             />
             <label htmlFor="imageUrl" />
             <small>imageUrl:</small>
@@ -187,7 +197,7 @@ export class AdminDashboard extends React.Component {
               }}
               name="imageUrl"
               type="text"
-              value={this.state.imageUrl}
+              //   value={this.state.imageUrl}
             />
             <label htmlFor="brand" />
             <small>Brand:</small>
@@ -197,13 +207,14 @@ export class AdminDashboard extends React.Component {
               }}
               name="brand"
               type="text"
-              value={this.state.brand}
+              //   value={this.state.brand}
             />
             <button
               type="submit"
               onClick={evt => {
                 evt.preventDefault()
                 this.props.creatingProduct(this.state)
+                this.props.addingProduct(this.state)
                 this.setState({
                   name: '',
                   price: '',
@@ -223,15 +234,19 @@ export class AdminDashboard extends React.Component {
 }
 
 const mapState = state => {
-  return {products: state.allProductsReducer.all}
+  console.log(state.dashboardReducer)
+  return {products: state.dashboardReducer.all}
 }
 
 const mapDispatch = dispatch => {
   return {
+    addingProduct: product => {
+      dispatch(addProduct(product))
+    },
     creatingProduct: product => {
       dispatch(createProduct(product))
     },
-    fetchProducts: () => dispatch(fetchProducts()),
+    adminFetchProducts: () => dispatch(adminFetchProducts()),
     deletingProduct: product => {
       dispatch(deleteProduct(product))
     },
@@ -240,10 +255,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(AdminDashboard)
-
-// AdminDashboard.propTypes = {
-//     // name: PropTypes.string.isRequired,
-//     // displayName: PropTypes.string.isRequired,
-//     handleSubmit: PropTypes.func.isRequired,
-//     // error: PropTypes.object
-//   }

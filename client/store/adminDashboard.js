@@ -6,6 +6,26 @@ const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 const CREATE_PRODUCT = 'CREATE_PRODUCT'
 
+const SET_PRODUCTS = 'SET_PRODUCT'
+
+export const adminSetProducts = products => {
+  return {
+    type: SET_PRODUCTS,
+    products
+  }
+}
+
+export const adminFetchProducts = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/products')
+      dispatch(adminSetProducts(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 export const deletingProduct = product => ({
   type: DELETE_PRODUCT,
   product
@@ -42,10 +62,9 @@ export const updatingProduct = product => {
 
 export const updateProduct = product => {
   return async dispatch => {
-    const updated = await axios.put(`/api/products/${product.id}`, product).data
-    dispatch(updatingProduct(updated))
-    console.log('updated', updated)
-    // history.push('/')
+    const updated = await axios.put(`/api/products/${product.id}`, product)
+    console.log('updated===>', updated.data)
+    dispatch(updatingProduct(updated.data))
   }
 }
 
@@ -57,8 +76,9 @@ const initialState = {
 // added to the Redux store with combineReducers
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_PRODUCTS:
+      return {...state, all: action.products}
     case UPDATE_PRODUCT:
-      console.log('yoooooooo', action.product)
       return {
         ...state,
         all: state.all.map(
