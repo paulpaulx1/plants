@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-
 const Navbar = ({handleClick, isLoggedIn, userId}) => (
   <div>
     <h1 className="toplogo">CRAZY VITO'S HAT EMPORIUM</h1>

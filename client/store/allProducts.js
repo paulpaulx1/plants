@@ -46,6 +46,26 @@ export const deleteProduct = product => {
   }
 }
 
+//Sorts and filters
+const SORT_BY_ALPHABET = 'SORT_BY_ALPHABET'
+const SORT_BY_PRICE = 'SORT_BY_PRICE'
+const FILTER_BY_PRICE = 'FILTER_BY_PRICE'
+
+export const sortByPrice = price => ({
+  type: SORT_BY_PRICE,
+  price
+})
+
+export const filterByPrice = price => ({
+  type: FILTER_BY_PRICE,
+  price
+})
+
+export const sortByAlphabet = alpha => ({
+  type: SORT_BY_ALPHABET,
+  alpha
+})
+
 const initialState = {
   all: []
 }
