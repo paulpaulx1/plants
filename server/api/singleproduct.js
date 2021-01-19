@@ -48,6 +48,7 @@ router.put('/:id', async (req, res, next) => {
       res.sendStatus(404)
     } else {
       await product.update(req.body)
+      console.log('this product', product)
       res.json(product)
     }
   } catch (ex) {
