@@ -100,7 +100,7 @@ export class AdminDashboard extends React.Component {
                         imageUrl: '',
                         brand: ''
                       })
-                      console.log(state.dashboardReducer.all)
+                      // console.log(state.dashboardReducer.all)
                     }}
                   >
                     Change Price ===

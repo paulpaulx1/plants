@@ -48,11 +48,11 @@ class GuestShoppingCart extends Component {
     return (
       <>
         <h1>Shopping Cart</h1>
-        <div className="cart-things">
+        <div>
           {products.length === 0 ? (
             <div>Shopping Cart Is Empty</div>
           ) : (
-            <div className="flex-cart">
+            <div className="flex-cart" id="checkoutDiv">
               {products.map(product => (
                 <div key={product.id}>
                   <h4>{product.name}</h4>
@@ -87,16 +87,17 @@ class GuestShoppingCart extends Component {
                   </button>
                 </div>
               ))}
-              <div>
+              <div id="thisguy">
                 {products === null ? (
-                  <div className="flex-cart">
+                  <div>
                     <div>Shopping Cart Is Empty</div>
                   </div>
                 ) : (
-                  <div>
-                    <div>TOTAL: ${total}</div>
+                  <div id="checkoutDiv">
+                    <div id="checkoutDiv">TOTAL: ${total}</div>
                     <Link to="/orderconfirmation">
                       <button
+                        id="checkoutButton"
                         type="submit"
                         onClick={() => this.guestCartCheckout()}
                       >

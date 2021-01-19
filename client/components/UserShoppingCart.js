@@ -31,13 +31,13 @@ class UserShoppingCart extends Component {
     return (
       <div>
         <h1>Shopping Cart</h1>
-        <div className="cart-things" />
+        <div id="thisguy" />
         {products.length === 0 ? (
           <div>Shopping Cart Is Empty</div>
         ) : (
-          <div className="flex-cart">
-            {products.map((product, idx) => (
-              <div key={idx}>
+          <div className="flex-cart" id="checkoutDiv">
+            {products.map(product => (
+              <div className="cartdiv" key={product.id}>
                 <h4>{product.name}</h4>
                 <img src={product.imageUrl} height="185" />
                 <h4>Quantity: {product.Orders[0].OrderHistory.quantity}</h4>
@@ -73,8 +73,9 @@ class UserShoppingCart extends Component {
                 >
                   -
                 </button>
-                <div>
+                <div id="checkoutDiv">
                   <button
+                    className="cartAddSubtractButton"
                     type="button"
                     onClick={() =>
                       this.props.deleteProductFromUserCart(product.id, userId)
@@ -85,14 +86,15 @@ class UserShoppingCart extends Component {
                 </div>
               </div>
             ))}
-            <div>
+            <div id="thisguy">
               {products === null ? (
                 <div>Shopping Cart Is Empty</div>
               ) : (
-                <div>
-                  <div>TOTAL: ${total}</div>
+                <div id="checkoutDiv">
+                  <div id="checkoutDiv">TOTAL: ${total}</div>
                   <Link to="/orderconfirmation">
                     <button
+                      id="checkoutButton"
                       type="submit"
                       onClick={() => this.props.userCheckout(userId)}
                     >
