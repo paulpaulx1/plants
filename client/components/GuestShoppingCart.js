@@ -58,10 +58,7 @@ class GuestShoppingCart extends Component {
                   <h4>{product.name}</h4>
                   <img src={product.imageUrl} height="185" />
                   <h4>Quantity: {product.orderQuantity}</h4>
-                  <h4>
-                    Price: $
-                    {this.roundDecimal(product.price)}
-                  </h4>
+                  <h4>Price: ${this.roundDecimal(product.price)}</h4>
 
                   <button
                     className="cartAddSubtractButton"

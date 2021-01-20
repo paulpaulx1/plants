@@ -7,10 +7,10 @@ const retrieveOrderHistory = orders => ({
   orders
 })
 
-export const getOrderHistory = id => {
+export const getOrderHistory = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/users/${id}/orderHistory`)
+      const {data} = await axios.get(`/api/users/orderHistory`)
       dispatch(retrieveOrderHistory(data))
     } catch (err) {
       console.log(err)

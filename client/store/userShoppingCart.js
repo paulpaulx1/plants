@@ -31,20 +31,20 @@ export const userCheckout = () => ({
   type: USER_CHECKOUT
 })
 
-export const getUserShoppingCart = userId => {
+export const getUserShoppingCart = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/users/${userId}/cart`)
+      const {data} = await axios.get(`/api/users/cart`)
       dispatch(setUserCart(data))
     } catch (err) {
       console.log(err)
     }
   }
 }
-export const addingToUserShoppingCart = (ProductId, UserId) => {
+export const addingToUserShoppingCart = ProductId => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/users/${UserId}/cart`, {
+      const {data} = await axios.post('/api/users/cart', {
         ProductId: ProductId
       })
       dispatch(addProductToUserCart(data))
@@ -53,40 +53,40 @@ export const addingToUserShoppingCart = (ProductId, UserId) => {
     }
   }
 }
-export const addingToUserCart = (ProductId, OrderId, userId) => {
+export const addingToUserCart = (ProductId, OrderId) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/users/${userId}/cart/add`, {ProductId, OrderId})
+      await axios.put('/api/users/cart/add', {ProductId, OrderId})
       dispatch(addToUserCart(ProductId))
     } catch (err) {
       console.log(err)
     }
   }
 }
-export const subtractingFromUserCart = (ProductId, OrderId, userId) => {
+export const subtractingFromUserCart = (ProductId, OrderId) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/users/${userId}/cart/remove`, {ProductId, OrderId})
+      await axios.put('/api/users/cart/remove', {ProductId, OrderId})
       dispatch(subtractFromUserCart(ProductId))
     } catch (err) {
       console.log(err)
     }
   }
 }
-export const deletingFromUserCart = (ProductId, userId) => {
+export const deletingFromUserCart = ProductId => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/users/${userId}/cart/${ProductId}`)
+      await axios.delete(`/api/users/cart/${ProductId}`)
       dispatch(deleteFromUserCart(ProductId))
     } catch (err) {
       console.log(err)
     }
   }
 }
-export const userCartCheckout = userId => {
+export const userCartCheckout = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/users/${userId}/checkout`)
+      const {data} = await axios.put(`/api/users/checkout`)
       dispatch(userCheckout(data))
     } catch (err) {
       console.log(err)
