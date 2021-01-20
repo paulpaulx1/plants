@@ -231,8 +231,7 @@ h1 {
     -1px -1px 0 #23430c; */
 }
 .toplogo {
-  background: linear-gradient(
-    169deg,
+  background: radial-gradient(
     rgb(216, 129, 59, 0.8),
     #d4ef4a,
     rgba(191, 99, 164, 0.96),
@@ -251,6 +250,8 @@ h1 {
   padding: 1rem;
   outline-offset: 0.5rem;
   color: rgb(83, 82, 82);
+  /* color: rgb(255, 255, 255); */
+  /* color: rgba(235, 230, 224, 0.856); */
   font-size: x-large;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   /* color: rgba(83, 82, 82, .0); */

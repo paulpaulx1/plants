@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+// import {isAdmin} from '../../server/auth/verify'
 
-const Navbar = ({handleClick, isLoggedIn, userId}) => (
+const Navbar = ({handleClick, isLoggedIn, userId, isAdmin}) => (
   <div>
     <h1 className="toplogo">CRAZY VITO'S NOVELTY HAT EMPORIUM</h1>
     <nav>
@@ -12,8 +13,24 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <Link id="navtext" to="/home">
-            Home
+            My Account
           </Link>
+          {isAdmin ? (
+            <Link id="navtext" to="/admin">
+              {' '}
+              Admin
+            </Link>
+          ) : (
+            <span />
+          )}
+          {isAdmin ? (
+            <Link id="navtext" to="/users">
+              {' '}
+              All Users
+            </Link>
+          ) : (
+            <span />
+          )}
           <Link id="navtext" to="/all">
             Novelty Hats
           </Link>
@@ -55,7 +72,8 @@ const Navbar = ({handleClick, isLoggedIn, userId}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    userId: state.user.id
+    userId: state.user.id,
+    isAdmin: !!state.user.isAdmin
   }
 }
 
