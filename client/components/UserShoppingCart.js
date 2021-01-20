@@ -30,7 +30,7 @@ class UserShoppingCart extends Component {
 
     return (
       <div>
-        <h1>Shopping Cart</h1>
+        <h1 id="shopcart">Shopping Cart</h1>
         <div id="thisguy" />
         {products.length === 0 ? (
           <div>Shopping Cart Is Empty</div>
