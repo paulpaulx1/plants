@@ -90,11 +90,12 @@ export class AllProducts extends React.Component {
           <h1 id="shopcart">All Hats</h1>
           <div>
             <select
+              defaultValue="default"
               onChange={e => {
                 this.sortProducts(e)
               }}
             >
-              <option value="" disabled selected>
+              <option value="default" disabled>
                 Sort by
               </option>
 
