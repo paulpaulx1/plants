@@ -1,17 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {adminFetchProducts} from '../store/adminDashBoard'
 import {
+  adminFetchProducts,
   createProduct,
   deleteProduct,
   updateProduct
 } from '../store/adminDashboard'
 
 import {addProduct} from '../store/allProducts'
-
-import {Link} from 'react-router-dom'
-import {setProduct} from '../store/singleProduct'
-import axios from 'axios'
 
 export class AdminDashboard extends React.Component {
   constructor() {
