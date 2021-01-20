@@ -48,7 +48,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Shark Hat',
-      price: 19.95,
+      price: 270.95,
       description: 'CHOMP CHOMP',
       inStock: true,
       imageUrl:
@@ -57,7 +57,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Big Tophat',
-      price: 19.95,
+      price: 133.95,
       description: 'Nice.',
       inStock: true,
       imageUrl:
@@ -75,7 +75,7 @@ async function seed() {
     }),
     Product.create({
       name: 'King Cobra',
-      price: 19.95,
+      price: 20.5,
       description: 'Hssssssssssssssss',
       inStock: true,
       imageUrl:
@@ -93,7 +93,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Spanish Plague Doctor',
-      price: 19.95,
+      price: 44.95,
       description: 'Timely!',
       inStock: true,
       imageUrl:
@@ -102,7 +102,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Angler Fish',
-      price: 19.95,
+      price: 11.95,
       description: 'From the deep',
       inStock: true,
       imageUrl:
@@ -111,7 +111,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Parrot Head',
-      price: 19.95,
+      price: 55.95,
       description: 'Jamaica Mistake-a',
       inStock: true,
       imageUrl:
@@ -120,7 +120,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Squid Hat',
-      price: 19.95,
+      price: 29.95,
       description: 'Release the Kraken',
       inStock: true,
       imageUrl:
@@ -129,7 +129,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Biker Boi',
-      price: 19.95,
+      price: 190.95,
       description: 'Yes sir',
       imageUrl:
         'https://cdn.shoplightspeed.com/shops/608600/files/27491685/700x700x2/leather-man-garrison-pisscutter-leather-cap.jpg',

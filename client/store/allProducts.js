@@ -52,19 +52,19 @@ const SORT_BY_PRICE = 'SORT_BY_PRICE'
 const FILTER_BY_PRICE = 'FILTER_BY_PRICE'
 const FILTER_BY_VALUE = 'FILTER_BY_VALUE'
 
-export const sortByPrice = price => ({
+export const sortByPrice = products => ({
   type: SORT_BY_PRICE,
-  price
+  products
 })
 
-export const filterByPrice = price => ({
+export const filterByPrice = products => ({
   type: FILTER_BY_PRICE,
-  price
+  products
 })
 
-export const sortByAlphabet = alpha => ({
+export const sortByAlphabet = products => ({
   type: SORT_BY_ALPHABET,
-  alpha
+  products
 })
 
 export const filterByValue = products => ({
@@ -90,6 +90,10 @@ export default function allProductsReducer(state = initialState, action) {
         all: state.all.filter(product => product.id !== action.product.id)
       }
     case FILTER_BY_VALUE:
+      return {...state, all: action.products}
+    case SORT_BY_PRICE:
+      return {...state, all: action.products}
+    case SORT_BY_ALPHABET:
       return {...state, all: action.products}
     default:
       return state
