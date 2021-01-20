@@ -1,20 +1,155 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/allProducts'
+import {
+  fetchProducts,
+  filterByValue,
+  sortByAlphabet,
+  sortByPrice
+} from '../store/allProducts'
 import {Link} from 'react-router-dom'
 
 export class AllProducts extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      input: ''
+    }
+    this.handleKey = this.handleKey.bind(this)
+    this.filterProducts = this.filterProducts.bind(this)
+    this.sortProducts = this.sortProducts.bind(this)
+    this.sortAsc = this.sortAsc.bind(this)
+    this.sortDesc = this.sortDesc.bind(this)
+  }
   componentDidMount() {
     this.props.fetchProducts()
   }
 
+  handleKey(evt) {
+    if (evt.key === 'Enter') {
+      this.props.filterProducts(this.state.input)
+      this.setState({input: ''})
+    }
+  }
+
+  filterProducts = input => {
+    console.log('FILTER INPUT ------->', input)
+    console.log('PRODUCTS', this.props.products)
+    input = input.toLowerCase()
+    let filteredValues = this.props.products.filter(product => {
+      return (
+        product.name.toLowerCase().includes(input) ||
+        product.brand.toLowerCase().includes(input)
+      )
+    })
+    console.log('FILTERED VALUE ------->', filteredValues)
+    this.props.filter(filteredValues)
+  }
+
+  sortProducts(e) {
+    let value = e.target.value
+    console.log('SORT', value)
+    let direction = value.endsWith('asc') ? 'asc' : 'desc'
+
+    if (value.startsWith('price')) {
+      let sortedPriceProducts =
+        direction === 'asc'
+          ? this.props.products.slice(0).sort((a, b) => a.price - b.price)
+          : this.props.products.slice(0).sort((a, b) => b.price - a.price)
+
+      // console.log(sortedPriceProducts)
+      this.props.priceSort(sortedPriceProducts)
+      console.log('THIS.PROPS', this.props.products)
+    } else {
+      let sortedPriceProducts =
+        direction === 'asc'
+          ? this.sortAsc(this.props.products, 'name')
+          : this.sortDesc(this.props.products, 'name')
+
+      // console.log(sortedPriceProducts)
+      this.props.alphaSort(sortedPriceProducts)
+      console.log('THIS.PROPS', this.props.products)
+    }
+  }
+
+  sortAsc = (arr, field) => {
+    return arr.slice(0).sort(function(a, b) {
+      if (a[field] > b[field]) return 1
+
+      if (b[field] > a[field]) return -1
+
+      return 0
+    })
+  }
+
+  sortDesc = (arr, field) => {
+    return arr.slice(0).sort(function(a, b) {
+      if (a[field] > b[field]) return -1
+
+      if (b[field] > a[field]) return 1
+
+      return 0
+    })
+  }
+
   render() {
+    console.log('THIS.PROPS', this.props.products)
+    // console.log('THIS.STATE', this.state)
     const {products} = this.props
     return (
       <header className="flex-container">
         <span>
           {' '}
           <h1>All Hats</h1>
+          <div>
+            <select
+              onChange={e => {
+                this.sortProducts(e)
+              }}
+            >
+              <option value="" disabled selected>
+                Sort by
+              </option>
+
+              <option value="alphabet_asc">Name - A-Z</option>
+              <option value="alphabet_desc">Name - Z-A</option>
+
+              <option value="price_asc">Price - Lowest to Highest</option>
+              <option value="price_desc">Price - Highest to Lowest</option>
+            </select>
+          </div>
+          <div className="control" style={{minWidth: '300px'}}>
+            <input
+              type="text"
+              value={this.state.input}
+              onChange={evt => {
+                // console.log(evt.target.value)
+                this.setState({input: evt.target.value})
+              }}
+              onKeyDown={this.handleKey}
+              style={{width: '100%'}}
+              placeholder="Filter by"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                // console.log('TEST----->', this.state.input)
+                this.filterProducts(this.state.input)
+                this.setState({input: ''})
+              }}
+            >
+              Filter
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                // console.log('TEST----->', this.state.input)
+                this.props.fetchProducts()
+                this.setState({input: ''})
+              }}
+            >
+              RESET
+            </button>
+          </div>
           <div>
             {products.map(product => (
               <div key={product.id}>
@@ -39,6 +174,15 @@ const mapDispatch = dispatch => {
   return {
     fetchProducts: () => {
       dispatch(fetchProducts())
+    },
+    filter: value => {
+      dispatch(filterByValue(value))
+    },
+    priceSort: value => {
+      dispatch(sortByPrice(value))
+    },
+    alphaSort: value => {
+      dispatch(sortByAlphabet(value))
     }
   }
 }

@@ -46,6 +46,32 @@ export const deleteProduct = product => {
   }
 }
 
+//Sorts and filters
+const SORT_BY_ALPHABET = 'SORT_BY_ALPHABET'
+const SORT_BY_PRICE = 'SORT_BY_PRICE'
+const FILTER_BY_PRICE = 'FILTER_BY_PRICE'
+const FILTER_BY_VALUE = 'FILTER_BY_VALUE'
+
+export const sortByPrice = products => ({
+  type: SORT_BY_PRICE,
+  products
+})
+
+export const filterByPrice = products => ({
+  type: FILTER_BY_PRICE,
+  products
+})
+
+export const sortByAlphabet = products => ({
+  type: SORT_BY_ALPHABET,
+  products
+})
+
+export const filterByValue = products => ({
+  type: FILTER_BY_VALUE,
+  products
+})
+
 const initialState = {
   all: []
 }
@@ -63,6 +89,12 @@ export default function allProductsReducer(state = initialState, action) {
         ...state,
         all: state.all.filter(product => product.id !== action.product.id)
       }
+    case FILTER_BY_VALUE:
+      return {...state, all: action.products}
+    case SORT_BY_PRICE:
+      return {...state, all: action.products}
+    case SORT_BY_ALPHABET:
+      return {...state, all: action.products}
     default:
       return state
   }
