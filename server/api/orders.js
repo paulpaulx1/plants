@@ -5,7 +5,6 @@ module.exports = router
 
 //(CART) retrieve user cart
 router.get('/cart', async (req, res, next) => {
-  console.log(req.user)
   try {
     const cartItems = await Product.findAll({
       include: {
@@ -29,7 +28,6 @@ router.get('/cart', async (req, res, next) => {
 
 //ensure it remains as put, increases and decreases quantity inside cart
 router.put('/cart/:action', async function(req, res, next) {
-  console.log('ACTION----->', req.params.action)
   try {
     const ProductId = req.body.ProductId
     const OrderId = req.body.OrderId
@@ -56,11 +54,9 @@ router.post('/cart', async (req, res, next) => {
   //ensure that front-end has proper naming convention for quantity being sent as "quantity"
   try {
     const currentProduct = await Product.findByPk(req.body.ProductId)
-    console.log(currentProduct)
     const currentOrder = await Order.findOrCreate({
       where: {UserId: req.user.id, processed: false}
     })
-    console.log(currentOrder)
     await currentOrder[0].addProduct(currentProduct)
 
     const newProduct = await Product.findByPk(req.body.ProductId, {
