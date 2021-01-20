@@ -1,86 +1,116 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {
   getGuestShoppingCart,
   addingToCart,
   subtractingFromCart,
-  deletingFromCart
+  deletingFromCart,
+  guestCartCheckout
 } from '../store/guestShoppingCart'
 
 class GuestShoppingCart extends Component {
+  constructor(props) {
+    super(props)
+    this.guestCartCheckout = this.guestCartCheckout.bind(this)
+    this.addToCart = this.addToCart.bind(this)
+    this.subtractFromCart = this.subtractFromCart.bind(this)
+    this.deleteFromCart = this.deleteFromCart.bind(this)
+  }
   componentDidMount() {
     this.props.loadGuestShoppingCart()
-    this.props.addToCart()
-    this.props.subtractFromCart()
-    this.props.deleteFromCart()
+  }
+
+  guestCartCheckout() {
+    this.props.guestCartCheckout()
+  }
+  addToCart(event) {
+    this.props.addToCart(event)
+  }
+  subtractFromCart(event) {
+    this.props.subtractFromCart(event)
+  }
+  deleteFromCart(event) {
+    this.props.deleteFromCart(event)
   }
 
   roundDecimal(num) {
     return Number(num).toFixed(2)
   }
 
-  //Need to link to confirmation page!
-  processOrder() {
-    const products = this.props.products
-    let total = products.map(x => Number(x.price * x.orderQuantity).toFixed(2))
-    let cart = JSON.parse(localStorage.getItem('shoppingCart'))
-    cart.map(product => (product.processed = true))
-    localStorage.setItem('shoppingCart', JSON.stringify(cart))
-  }
-
   render() {
-    let styleObj = {fontSize: '18px'}
     const products = this.props.products
+
+    let total = products
+      .reduce((acc, product) => acc + product.price * product.orderQuantity, 0)
+      .toFixed(2)
 
     return (
-      <div>
-        <h1>Shopping Cart</h1>
-        {products === null ? (
-          <div>Shopping Cart Is Empty</div>
-        ) : (
-          <div>
-            {products.map(product => (
-              <div key={product.id}>
-                <h4>{product.name}</h4>
-                <img src={product.imageUrl} height="100" />
-                <h4>Quantity: {product.orderQuantity}</h4>
-                <h4>
-                  Price: ${this.roundDecimal(
-                    product.price * product.orderQuantity
-                  )}
-                </h4>
-                <button
-                  type="button"
-                  onClick={() => this.props.addToCart(product.id)}
-                >
-                  Add To Product
-                </button>
-                <button
-                  type="button"
-                  onClick={() => this.props.subtractFromCart(product.id)}
-                >
-                  Subtract From Cart
-                </button>
-                <button
-                  type="button"
-                  onClick={() => this.props.deleteFromCart(product.id)}
-                >
-                  Remove From Cart
-                </button>
-                {/* need to figure out how to render 'Shopping Cart Is Empty' if all products have been removed */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('checkout button clicked!')
-                  }}
-                >
-                  Proceed To Checkout
-                </button>
+      <>
+        <h1 id="shopcart">Shopping Cart</h1>
+        <div>
+          {products.length === 0 ? (
+            <div>Shopping Cart Is Empty</div>
+          ) : (
+            <div className="flex-cart" id="checkoutDiv">
+              {products.map(product => (
+                <div key={product.id}>
+                  <h4>{product.name}</h4>
+                  <img src={product.imageUrl} height="185" />
+                  <h4>Quantity: {product.orderQuantity}</h4>
+                  <h4>
+                    Price: $
+                    {this.roundDecimal(product.price)}
+                  </h4>
+
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.addToCart(product.id)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.subtractFromCart(product.id)}
+                  >
+                    -
+                  </button>
+
+                  <button
+                    className="cartAddSubtractButton"
+                    type="button"
+                    onClick={() => this.deleteFromCart(product.id)}
+                  >
+                    Remove From Cart
+                  </button>
+                </div>
+              ))}
+              <div id="thisguy">
+                {products === null ? (
+                  <div>
+                    <div>Shopping Cart Is Empty</div>
+                  </div>
+                ) : (
+                  <div id="checkoutDiv">
+                    <div id="checkoutDiv">TOTAL: ${total}</div>
+                    <Link to="/orderconfirmation">
+                      <button
+                        id="checkoutButton"
+                        type="submit"
+                        onClick={() => this.guestCartCheckout()}
+                      >
+                        Place Your Order
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      </>
     )
   }
 }
@@ -104,7 +134,8 @@ const mapDispatch = dispatch => {
     },
     deleteFromCart: productId => {
       dispatch(deletingFromCart(productId))
-    }
+    },
+    guestCartCheckout: () => dispatch(guestCartCheckout())
   }
 }
 

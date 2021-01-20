@@ -3,40 +3,64 @@ const router = require('express').Router()
 const {Product, OrderHistory, Order} = require('../db/models')
 module.exports = router
 
+//(CART) retrieve user cart
+router.get('/:id/cart', async (req, res, next) => {
+  try {
+    const cartItems = await Product.findAll({
+      include: {
+        model: Order,
+        where: {
+          UserId: req.params.id,
+          processed: false
+        }
+      }
+    })
+    if (cartItems.length === 0) {
+      const error = new Error('API Cart Is Empty')
+      // next(error)
+    } else {
+      res.json(cartItems)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 //ensure it remains as put, increases and decreases quantity inside cart
 router.put('/:id/cart/:action', async function(req, res, next) {
+  console.log('ACTION----->', req.params.action)
   try {
-    const {ProductId, OrderId} = req.body
+    const ProductId = req.body.ProductId
+    const OrderId = req.body.OrderId
     const orderItem = await OrderHistory.findOne({
       where: {
         ProductId: ProductId,
         OrderId: OrderId
       }
     })
-    if (req.params.action === 'increment') {
+    if (req.params.action === 'add') {
       await orderItem.increment('quantity')
     }
-    if (req.params.action === 'decrement') {
-
+    if (req.params.action === 'remove') {
       await orderItem.decrement('quantity')
     }
     res.json(orderItem)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
   }
 })
 
-
-//adds to the cart
-router.put('/:id/cart', async (req, res, next) => {
+router.post('/:id/cart', async (req, res, next) => {
   //ensure that front-end has proper naming convention for id being sent as "ProductId"
   //ensure that front-end has proper naming convention for quantity being sent as "quantity"
   try {
     const currentProduct = await Product.findByPk(req.body.ProductId)
-    const currentOrder = await Order.findOne({
+    console.log(currentProduct)
+    const currentOrder = await Order.findOrCreate({
       where: {UserId: req.params.id, processed: false}
     })
-    await currentOrder.addProduct(currentProduct)
+    console.log(currentOrder)
+    await currentOrder[0].addProduct(currentProduct)
 
     const newProduct = await Product.findByPk(req.body.ProductId, {
       include: {
@@ -46,7 +70,7 @@ router.put('/:id/cart', async (req, res, next) => {
     const orderItem = await OrderHistory.findOne({
       where: {
         ProductId: req.body.ProductId,
-        OrderId: currentOrder.id
+        OrderId: currentOrder[0].id
       }
     })
     if (req.body.quantity) {
@@ -73,29 +97,6 @@ router.delete('/:id/cart/:productId', async (req, res, next) => {
   }
 })
 
-//(CART) retrieve user cart
-router.get('/:id/cart', async (req, res, next) => {
-  try {
-    const cartItems = await Product.findAll({
-      include: {
-        model: Order,
-        where: {
-          UserId: req.params.id,
-          processed: false
-        }
-      }
-    })
-    if (cartItems.length === 0) {
-      const error = new Error('Your cart is empty')
-      next(error)
-    } else {
-      res.json(cartItems)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
-
 //GET user order history
 router.get('/:id/orderHistory', async (req, res, next) => {
   try {
@@ -104,7 +105,24 @@ router.get('/:id/orderHistory', async (req, res, next) => {
       include: {model: Product}
     })
     res.json(oldOrders)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id/checkout', async (req, res, next) => {
+  const UserId = req.params.id
+  try {
+    const currentOrder = await Order.findOne({
+      where: {UserId: UserId, processed: false}
+    })
+    await currentOrder.update({
+      processed: true
+    })
+    res.json(currentOrder)
+    const newOrder = await Order.create()
+    await newOrder.setUser(UserId)
+  } catch (err) {
+    next(err)
   }
 })

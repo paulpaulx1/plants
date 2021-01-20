@@ -10,7 +10,7 @@ class OrderHistory extends React.Component {
 
   render() {
     const orderHistory = this.props.history
-    //HIIII
+
     return (
       <div>
         <h1>Order History</h1>

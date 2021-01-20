@@ -3,46 +3,52 @@ const faker = require('faker')
 
 const db = require('../server/db')
 const {User} = require('../server/db/models/')
-const {Product} = require('../server/db/models/')
+const {Product, Order} = require('../server/db/models/')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  function generateUsers() {
-    let users = []
+  const users = await Promise.all([
+    User.create({email: 'cody@email.com', password: '123', isAdmin: false}),
+    User.create({email: 'murphy@email.com', password: '123', isAdmin: false}),
+    User.create({email: 'admin@email.com', password: '123', isAdmin: true})
+  ])
 
-    for (let id = 1; id <= 100; id++) {
-      users.push(
-        User.create({
-          name: faker.name.findName(),
-          email: faker.internet.email(),
-          address:
-            faker.address.streetAddress() +
-            ', ' +
-            faker.address.city() +
-            ', ' +
-            faker.address.stateAbbr() +
-            ', ' +
-            faker.address.zipCode(),
-          password: '123',
-          paymentInfo:
-            faker.finance.creditCardNumber() +
-            ', CVV ' +
-            faker.finance.creditCardCVV()
-        })
-      )
-    }
+  // function generateUsers() {
+  //   let users = []
 
-    return users
-  }
+  //   for (let id = 1; id <= 100; id++) {
+  //     users.push(
+  //       User.create({
+  //         name: faker.name.findName(),
+  //         email: faker.internet.email(),
+  //         address:
+  //           faker.address.streetAddress() +
+  //           ', ' +
+  //           faker.address.city() +
+  //           ', ' +
+  //           faker.address.stateAbbr() +
+  //           ', ' +
+  //           faker.address.zipCode(),
+  //         password: '123',
+  //         paymentInfo:
+  //           faker.finance.creditCardNumber() +
+  //           ', CVV ' +
+  //           faker.finance.creditCardCVV()
+  //       })
+  //     )
+  //   }
 
-  const users = await Promise.all(generateUsers())
+  //   return users
+  // }
+
+  // const users = await Promise.all(generateUsers())
 
   const products = await Promise.all([
     Product.create({
       name: 'Shark Hat',
-      price: 19.95,
+      price: 270.95,
       description: 'CHOMP CHOMP',
       inStock: true,
       imageUrl:
@@ -51,7 +57,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Big Tophat',
-      price: 19.95,
+      price: 133.95,
       description: 'Nice.',
       inStock: true,
       imageUrl:
@@ -69,7 +75,7 @@ async function seed() {
     }),
     Product.create({
       name: 'King Cobra',
-      price: 19.95,
+      price: 20.5,
       description: 'Hssssssssssssssss',
       inStock: true,
       imageUrl:
@@ -87,7 +93,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Spanish Plague Doctor',
-      price: 19.95,
+      price: 44.95,
       description: 'Timely!',
       inStock: true,
       imageUrl:
@@ -96,7 +102,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Angler Fish',
-      price: 19.95,
+      price: 11.95,
       description: 'From the deep',
       inStock: true,
       imageUrl:
@@ -105,7 +111,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Parrot Head',
-      price: 19.95,
+      price: 55.95,
       description: 'Jamaica Mistake-a',
       inStock: true,
       imageUrl:
@@ -114,7 +120,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Squid Hat',
-      price: 19.95,
+      price: 29.95,
       description: 'Release the Kraken',
       inStock: true,
       imageUrl:
@@ -123,23 +129,32 @@ async function seed() {
     }),
     Product.create({
       name: 'Biker Boi',
-      price: 19.95,
+      price: 190.95,
       description: 'Yes sir',
       imageUrl:
         'https://cdn.shoplightspeed.com/shops/608600/files/27491685/700x700x2/leather-man-garrison-pisscutter-leather-cap.jpg',
       brand: 'American Apparel'
     })
   ])
-  //https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg
-  //https://wwf.hats2020s.com/i.php?https://images-na.ssl-images-amazon.com/images/I/71co9uaR6FL._AC_UX342_.jpg
-  //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIQ2QJfHUIWdsnchlPU7fbL2Z-3guOmWrzBD2ZLKRexgJ5ghsdwKoq_yr9QW7WA4qCBR2LMCsj&usqp=CAc
-  //https://www.villagehatshop.com/photos/product/standard/4511390S836292/-/size-one-size-fits-most.jpg
-  //https://cdn11.bigcommerce.com/s-a4990/images/stencil/1280x1280/products/1227/5550/DA2936-blk__59368.1541617592.jpg?c=2
-  //https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S55459/alt/55459.jpg
-  //https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S77663/-/size-one-size-fits-most.jpg
+
+  const generateOrders = () => {
+    let orders = []
+    for (let i = 0; i < users.length; i++) {
+      orders.push(
+        Order.create({
+          processed: false,
+          UserId: i + 1
+        })
+      )
+    }
+    return orders
+  }
+
+  const orders = await Promise.all(generateOrders())
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 
