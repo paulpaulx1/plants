@@ -32,8 +32,6 @@ export class AllProducts extends React.Component {
   }
 
   filterProducts = input => {
-    console.log('FILTER INPUT ------->', input)
-    console.log('PRODUCTS', this.props.products)
     input = input.toLowerCase()
     let filteredValues = this.props.products.filter(product => {
       return (
@@ -41,13 +39,11 @@ export class AllProducts extends React.Component {
         product.brand.toLowerCase().includes(input)
       )
     })
-    console.log('FILTERED VALUE ------->', filteredValues)
     this.props.filter(filteredValues)
   }
 
   sortProducts(e) {
     let value = e.target.value
-    console.log('SORT', value)
     let direction = value.endsWith('asc') ? 'asc' : 'desc'
 
     if (value.startsWith('price')) {
@@ -55,19 +51,13 @@ export class AllProducts extends React.Component {
         direction === 'asc'
           ? this.props.products.slice(0).sort((a, b) => a.price - b.price)
           : this.props.products.slice(0).sort((a, b) => b.price - a.price)
-
-      // console.log(sortedPriceProducts)
       this.props.priceSort(sortedPriceProducts)
-      console.log('THIS.PROPS', this.props.products)
     } else {
       let sortedPriceProducts =
         direction === 'asc'
           ? this.sortAsc(this.props.products, 'name')
           : this.sortDesc(this.props.products, 'name')
-
-      // console.log(sortedPriceProducts)
       this.props.alphaSort(sortedPriceProducts)
-      console.log('THIS.PROPS', this.props.products)
     }
   }
 
@@ -92,8 +82,6 @@ export class AllProducts extends React.Component {
   }
 
   render() {
-    console.log('THIS.PROPS', this.props.products)
-    // console.log('THIS.STATE', this.state)
     const {products} = this.props
     return (
       <header className="flex-container">
@@ -122,7 +110,6 @@ export class AllProducts extends React.Component {
               type="text"
               value={this.state.input}
               onChange={evt => {
-                // console.log(evt.target.value)
                 this.setState({input: evt.target.value})
               }}
               onKeyDown={this.handleKey}
@@ -132,7 +119,6 @@ export class AllProducts extends React.Component {
             <button
               type="button"
               onClick={() => {
-                // console.log('TEST----->', this.state.input)
                 this.filterProducts(this.state.input)
                 this.setState({input: ''})
               }}
@@ -142,7 +128,6 @@ export class AllProducts extends React.Component {
             <button
               type="button"
               onClick={() => {
-                // console.log('TEST----->', this.state.input)
                 this.props.fetchProducts()
                 this.setState({input: ''})
               }}

@@ -18,7 +18,6 @@ export class AllUsers extends React.Component {
   }
 
   render() {
-    console.log('PROPS------->', this.props)
     if (this.state.dataLoaded === true) {
       const {users} = this.props
       return (
@@ -43,7 +42,6 @@ export class AllUsers extends React.Component {
   }
 }
 const mapState = state => {
-  console.log('STATE------>', state)
   return {users: state.allUsers.user}
 }
 

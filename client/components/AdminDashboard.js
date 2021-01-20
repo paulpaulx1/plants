@@ -29,14 +29,9 @@ export class AdminDashboard extends React.Component {
     this.props.adminFetchProducts()
   }
 
-  //   componentDidUpdate(prevProps, prevState) {
-
-  //      this.forceUpdate()
-  //       }
-
   render() {
     const {products} = this.props
-    // console.log('props======>', this.props)
+
     return (
       <header className="admin-dash">
         <span>
@@ -100,7 +95,6 @@ export class AdminDashboard extends React.Component {
                         imageUrl: '',
                         brand: ''
                       })
-                      // console.log(state.dashboardReducer.all)
                     }}
                   >
                     Change Price ===
@@ -234,7 +228,6 @@ export class AdminDashboard extends React.Component {
 }
 
 const mapState = state => {
-  console.log(state.dashboardReducer)
   return {products: state.dashboardReducer.all}
 }
 
