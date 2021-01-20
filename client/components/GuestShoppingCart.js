@@ -47,7 +47,7 @@ class GuestShoppingCart extends Component {
 
     return (
       <>
-        <h1>Shopping Cart</h1>
+        <h1 id="shopcart">Shopping Cart</h1>
         <div>
           {products.length === 0 ? (
             <div>Shopping Cart Is Empty</div>

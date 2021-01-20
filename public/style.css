@@ -8,10 +8,36 @@ body {
   border: 0.35rem rgba(83, 82, 82, 0.8) outset;
   /* min-height: 10vh */
 }
-
+.singletext {
+  color: black;
+  color: rgba(14, 13, 13, 0.877);
+  font-size: x-large;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.singleButton {
+  color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border: 0.35rem rgba(83, 82, 82, 0.8) outset;
+  align-content: center;
+}
+#singleButton:hover {
+  color: #ff00ff;
+} /* Mouse over link */
+#singleButton:active {
+  color: #0000ff;
+} /* Selected link   */
+.loginput {
+  color: black;
+}
+#GOOGLE {
+  color: black;
+}
+#shopcart {
+  color: rgb(37, 37, 37, 0.8);
+}
 #allproducttext {
   color: black;
-  color: rgba(39, 37, 37, 0.822);
+  color: rgba(14, 13, 13, 0.822);
   font-size: x-large;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   /* color: rgba(83, 82, 82, .0); */
@@ -28,14 +54,9 @@ body {
 } /* Selected link   */
 
 #navtext {
-  color: rgba(39, 37, 37, 0.8);
+  color: rgba(39, 37, 37, 0.452);
   font-size: x-large;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  /* color: rgba(83, 82, 82, .0); */
-
-  /* -webkit-text-stroke: 1px #23430c;
-  text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
-    -1px -1px 0 #23430c; */
 }
 #navtext:hover {
   color: #ff00ff;
@@ -91,11 +112,11 @@ body {
   color: rgba(12, 12, 12, 0.6);
   font-size: 20px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgba(212, 209, 209, 0.459);
+  color: rgba(78, 78, 78, 0.781);
   font-size: 24px;
-  -webkit-text-stroke: 1px #23430c;
+  /* -webkit-text-stroke: 1px #23430c;
   text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
-    -1px -1px 0 #23430c;
+    -1px -1px 0 #23430c; */
 }
 a {
   text-decoration: none;
@@ -170,7 +191,7 @@ button {
   margin: 20px;
   color: rgba(212, 209, 209, 0);
   font-size: 18px;
-  -webkit-text-stroke: 1px #0f1809;
+  /* -webkit-text-stroke: 1px #0f1809; */
 }
 .flex-cart {
   /* min-height: 50vh; */
@@ -212,15 +233,15 @@ h1 {
 .toplogo {
   background: linear-gradient(
     169deg,
-    rgb(216, 129, 59),
+    rgb(216, 129, 59, 0.8),
     #d4ef4a,
     rgba(191, 99, 164, 0.96),
-    rgb(16, 95, 243),
+    rgb(16, 95, 243, 0.8),
     rgb(244, 70, 133, 0.5),
-    rgb(252, 203, 19),
-    #6afc2c,
-    rgba(191, 99, 164, 0.96),
-    rgb(16, 95, 243)
+    rgb(252, 203, 19, 0.8),
+    #6afc2cda,
+    rgba(191, 99, 164, 0.8),
+    rgb(16, 95, 243, 0.8)
   );
   border: 0.5rem outset rgba(83, 82, 82, 0.6);
   outline: 0.8rem dotted rgb(252, 255, 53, 0.6);
@@ -234,9 +255,9 @@ h1 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   /* color: rgba(83, 82, 82, .0); */
   font-size: 53px;
-  -webkit-text-stroke: 1px #23430c;
+  /* -webkit-text-stroke: 1px #23430c;
   text-shadow: -1px 1px 2px #23430c, 1px 1px 2px #23430c, 1px -1px 0 #23430c,
-    -1px -1px 0 #23430c;
+    -1px -1px 0 #23430c; */
 }
 h1 {
   background: transparent;

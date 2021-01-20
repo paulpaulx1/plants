@@ -20,7 +20,6 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-
     const product = this.props.product.single
     const userId = this.props.userId
 
@@ -28,29 +27,36 @@ export class SingleProduct extends React.Component {
       return (
         <header>
           <span className="single-product">
-            <div> {product.name}</div>
-            <img src={product.imageUrl} height="404" />
-            <div>Price: {product.price}</div>
-            <div>Description: {product.description}</div>
-            {userId === undefined ? (
-              <button
-                style={{fontSize: '16px', background: 'transparent'}}
-                type="submit"
-                onClick={() => this.props.addProductToGuestCart(product)}
-              >
-                Add to cart
-              </button>
-            ) : (
-              <button
-                style={{fontSize: '16px', background: 'transparent'}}
-                type="submit"
-                onClick={() =>
-                  this.props.addProductToUserCart(product.id, userId)
-                }
-              >
-                Add to cart
-              </button>
-            )}
+            <img src={product.imageUrl} height="288" />
+            <div className="singletext">
+              {' '}
+              {product.name}
+              <br />
+              Price: {product.price}
+              <br />
+              Description: {product.description}
+              {userId === undefined ? (
+                <button
+                  // style={{fontSize: '16px', background: 'transparent'}}
+                  className="singleButton"
+                  type="submit"
+                  onClick={() => this.props.addProductToGuestCart(product)}
+                >
+                  Add to cart
+                </button>
+              ) : (
+                <button
+                  className="singleButton"
+                  type="submit"
+                  onClick={() =>
+                    this.props.addProductToUserCart(product.id, userId)
+                  }
+                >
+                  Add to cart
+                </button>
+              )}
+              <br />
+            </div>
           </span>
         </header>
       )
