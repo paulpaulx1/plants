@@ -8,6 +8,7 @@ import {
   deletingFromCart,
   guestCartCheckout
 } from '../store/guestShoppingCart'
+import Paper from '@material-ui/core/Paper'
 
 class GuestShoppingCart extends Component {
   constructor(props) {
@@ -40,65 +41,90 @@ class GuestShoppingCart extends Component {
 
   render() {
     const products = this.props.products
-
-    let total = products
-      .reduce((acc, product) => acc + product.price * product.orderQuantity, 0)
-      .toFixed(2)
+    let total
+    if (this.props.products) {
+      total = this.props.products
+        .reduce(
+          (acc, product) => acc + product.price * product.orderQuantity,
+          0
+        )
+        .toFixed(2)
+    }
 
     return (
       <>
-        <h1 id="shopcart">Shopping Cart</h1>
-        <div>
-          {products.length === 0 ? (
+        <h1 style={{textAlign: 'center'}}>shopping cart</h1>
+        <Paper style={{display: 'flex', justifyContent: 'center'}}>
+          {!products ? (
             <div>Shopping Cart Is Empty</div>
           ) : (
-            <div className="flex-cart" id="checkoutDiv">
+            <div>
               {products.map(product => (
-                <div key={product.id}>
+                <Paper key={product.id} className="cartitem">
                   <h4>{product.name}</h4>
-                  <img src={product.imageUrl} height="185" />
+                  <img src={product.imageUrl} height="220" />
                   <h4>Quantity: {product.orderQuantity}</h4>
                   <h4>Price: ${this.roundDecimal(product.price)}</h4>
 
                   <button
-                    className="cartAddSubtractButton"
+                    className="addtocart"
+                    style={{
+                      background: 'transparent',
+                      padding: '1em'
+                    }}
                     type="button"
                     onClick={() => this.addToCart(product.id)}
                   >
                     +
                   </button>
                   <button
-                    className="cartAddSubtractButton"
+                    className="addtocart"
                     type="button"
+                    style={{
+                      background: 'transparent',
+                      padding: '1em'
+                    }}
                     onClick={() => this.subtractFromCart(product.id)}
                   >
                     -
                   </button>
 
                   <button
-                    className="cartAddSubtractButton"
+                    className="addtocart"
+                    style={{
+                      background: 'transparent',
+                      padding: '1em'
+                    }}
                     type="button"
                     onClick={() => this.deleteFromCart(product.id)}
                   >
-                    Remove From Cart
+                    remove from cart
                   </button>
-                </div>
+                </Paper>
               ))}
-              <div id="thisguy">
+              <div>
                 {products === null ? (
                   <div>
-                    <div>Shopping Cart Is Empty</div>
+                    <div>buy some stuff</div>
                   </div>
                 ) : (
-                  <div id="checkoutDiv">
-                    <div id="checkoutDiv">TOTAL: ${total}</div>
-                    <Link to="/orderconfirmation">
+                  <div>
+                    <br />
+                    <div>total: ${total}</div>
+                    <Link
+                      to="/createcheckoutsession
+                  "
+                    >
                       <button
-                        id="checkoutButton"
+                        className="addtocart"
+                        style={{
+                          background: 'transparent',
+                          padding: '1em'
+                        }}
                         type="submit"
                         onClick={() => this.guestCartCheckout()}
                       >
-                        Place Your Order
+                        place order
                       </button>
                     </Link>
                   </div>
@@ -106,7 +132,7 @@ class GuestShoppingCart extends Component {
               </div>
             </div>
           )}
-        </div>
+        </Paper>
       </>
     )
   }

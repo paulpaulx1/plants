@@ -16,7 +16,7 @@ class OrderHistory extends React.Component {
         <h1>Order History</h1>
         <div>
           {orderHistory.length === 0 ? (
-            <div>You Have Not Purchased Any Of Our Crazy Vito's Hats!</div>
+            <div>buy some plants you haven't bought any plants</div>
           ) : (
             <div>
               {orderHistory.map(order => {

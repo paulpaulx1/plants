@@ -7,7 +7,8 @@ import {
   sortByPrice
 } from '../store/allProducts'
 import {Link} from 'react-router-dom'
-
+import Paper from '@material-ui/core/Paper'
+import MediaCard from './SingleCard'
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props)
@@ -82,73 +83,123 @@ export class AllProducts extends React.Component {
   }
 
   render() {
+    console.log(MediaCard)
     const {products} = this.props
     return (
-      <header className="flex-container">
-        <span>
-          {' '}
-          <h1 id="shopcart">All Hats</h1>
-          <div>
-            <select
-              defaultValue="default"
-              onChange={e => {
-                this.sortProducts(e)
-              }}
-            >
-              <option value="default" disabled>
-                Sort by
-              </option>
+      <Paper>
+        <header>
+          <span>
+            {' '}
+            <div style={{textAlign: 'center'}}>
+              <h1 id="shopcart">all plants</h1>
+            </div>
+            <Paper>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <select
+                  className="searchfilter"
+                  defaultValue="default"
+                  onChange={e => {
+                    this.sortProducts(e)
+                  }}
+                >
+                  <option value="default" disabled>
+                    Sort by
+                  </option>
 
-              <option value="alphabet_asc">Name - A-Z</option>
-              <option value="alphabet_desc">Name - Z-A</option>
+                  <option value="alphabet_asc">Name - A-Z</option>
+                  <option value="alphabet_desc">Name - Z-A</option>
 
-              <option value="price_asc">Price - Lowest to Highest</option>
-              <option value="price_desc">Price - Highest to Lowest</option>
-            </select>
-          </div>
-          <div className="control" style={{minWidth: '300px'}}>
-            <input
-              type="text"
-              value={this.state.input}
-              onChange={evt => {
-                this.setState({input: evt.target.value})
-              }}
-              onKeyDown={this.handleKey}
-              style={{width: '100%'}}
-              placeholder="Filter by"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                this.filterProducts(this.state.input)
-                this.setState({input: ''})
-              }}
-            >
-              Filter
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                this.props.fetchProducts()
-                this.setState({input: ''})
-              }}
-            >
-              RESET
-            </button>
-          </div>
-          <div>
-            {products.map(product => (
-              <div key={product.id}>
-                <Link to={`/product/${product.id}`}>
-                  <h4 id="allproducttext">{product.name}</h4>
-                  <h4 id="allproducttext">{(product.price * 1).toFixed(2)}</h4>
-                  <img src={product.imageUrl} height="250" />
-                </Link>
+                  <option value="price_asc">Price - Lowest to Highest</option>
+                  <option value="price_desc">Price - Highest to Lowest</option>
+                </select>
+
+                {/* <div style={{maxWidth: '300px'}}> */}
+                <input
+                  className="searchfilter"
+                  type="text"
+                  value={this.state.input}
+                  onChange={evt => {
+                    this.setState({input: evt.target.value})
+                  }}
+                  onKeyDown={this.handleKey}
+                  style={{width: '400px', marginLeft: '10px'}}
+                  placeholder="Filter by"
+                />
+                <button
+                  style={{
+                    background: 'transparent',
+                    padding: '.2em',
+                    margin: '8px',
+                    border: '1px solid #b4b4b4'
+                  }}
+                  className="searchfilter"
+                  type="button"
+                  onClick={() => {
+                    this.filterProducts(this.state.input)
+                    this.setState({input: ''})
+                  }}
+                >
+                  filter
+                </button>
+
+                <button
+                  style={{
+                    background: 'transparent',
+                    padding: '.2em',
+                    margin: '.2em',
+                    border: '1px solid #b4b4b4'
+                  }}
+                  className="searchfilter"
+                  type="button"
+                  onClick={() => {
+                    this.props.fetchProducts()
+                    this.setState({input: ''})
+                  }}
+                >
+                  reset
+                </button>
               </div>
-            ))}
-          </div>
-        </span>
-      </header>
+
+              {/* </div> */}
+            </Paper>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginTop: 20
+              }}
+            >
+              {products.map(product => (
+                <MediaCard
+                  product={product}
+                  key={product.id}
+                  price={(product.price * 1).toFixed(2)}
+                  name={product.name}
+                  description={product.description}
+                  url={product.imageUrl}
+                />
+                // <Paper key={product.id}>
+                // <div>
+                //   <Link to={`/product/${product.id}`}>
+                //     <h4 id="allproducttext">{product.name}</h4>
+                //     <h4 id="allproducttext">{(product.price * 1).toFixed(2)}</h4>
+                //     <img src={product.imageUrl} height="250" />
+                //   </Link>
+                // </div></Paper>
+              ))}
+            </div>
+          </span>
+        </header>
+      </Paper>
     )
   }
 }

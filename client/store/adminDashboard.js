@@ -49,7 +49,6 @@ export const createProduct = product => {
   return async dispatch => {
     const created = await axios.post('/api/products', product).data
     dispatch(creatingProduct(created))
-    // history.push('/')
   }
 }
 

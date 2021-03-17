@@ -29,7 +29,7 @@ export class AdminDashboard extends React.Component {
     const {products} = this.props
 
     return (
-      <header className="admin-dash">
+      <header>
         <span>
           {' '}
           <>PRODUCTS</>
@@ -45,7 +45,7 @@ export class AdminDashboard extends React.Component {
                   <br />
 
                   <>{product.name}</>
-                  <label htmlFor={product.name} />
+                  {/* <label htmlFor={product.name} /> */}
                   <button
                     type="submit"
                     onClick={evt => {

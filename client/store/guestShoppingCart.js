@@ -48,6 +48,10 @@ export const addingToShoppingCart = product => {
         // checking id to see if product is not in the cart
         if (!productArray.includes(product.id)) {
           cart.push(product)
+          // eslint-disable-next-line no-alert
+          alert(
+            'Querida cliente, favor selecionar o tamanho desejado antes de adicionar ao carrinho.'
+          )
         } else {
           // if product is in the cart...loop through to increase quantity
           // for (let i = 0; i < cart.length; i++) {

@@ -47,92 +47,116 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      name: 'Shark Hat',
+      name: "Aglaonema 'Emerald Bay' 10",
       price: 270.95,
-      description: 'CHOMP CHOMP',
+      description: 'Large silver and green variegated foliage.',
       inStock: true,
       imageUrl:
-        'https://www.villagehatshop.com/photos/product/giant/4511390S75022/-/size-one-size-fits-most.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/3990fe0df436e208b87caa9a6b020d2f_5000x.jpg?v=1606091715',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Big Tophat',
+      name: "Aglaonema 'Golden Madonna' 14",
       price: 133.95,
-      description: 'Nice.',
+      description: 'Large bright gold and green variegated foliage.',
       inStock: true,
       imageUrl:
-        'https://wwf.hats2020s.com/i.php?https://images-na.ssl-images-amazon.com/images/I/71co9uaR6FL._AC_UX342_.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/628fea790b836d98dd30ab0533f7c647_5000x.jpg?v=1607818727',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Weird Balaklava',
+      name: 'Aglaonema 10in Silver Bay',
       price: 19.95,
-      description: 'Stay back',
+      description:
+        'Rich green leaves with silver patterns on a medium-sized bushy plant. Grows a spathe-type inflorescence.',
       inStock: true,
       imageUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIQ2QJfHUIWdsnchlPU7fbL2Z-3guOmWrzBD2ZLKRexgJ5ghsdwKoq_yr9QW7WA4qCBR2LMCsj&usqp=CAc',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/d2e942f00b2ba58b1b1d1491c944d387_5000x.jpg?v=1596841548',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'King Cobra',
+      name: "Asplenium nidus 2in Crispy Wave Bird's Nest Fern",
       price: 20.5,
-      description: 'Hssssssssssssssss',
+      description:
+        'Lush, tropical fern that grows wavy sword-shaped fronds from a central rosette.',
       inStock: true,
       imageUrl:
-        'https://www.villagehatshop.com/photos/product/standard/4511390S836292/-/size-one-size-fits-most.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/c8a0e8a309cb4ec578322452adbe1f41_5000x.jpg?v=1614019345',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Dire Wolf',
+      name: "Pachira aquatica 'Money Tree Stump' 14",
       price: 19.95,
-      description: 'Dont murder me',
+      description:
+        'Thick central trunk topped with large, five-lobed, glossy green leaves.',
       inStock: true,
       imageUrl:
-        'https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S55459/alt/55459.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/a48beb3560b28a437bbcd947001d5c60_5000x.jpg?v=1606064710',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Spanish Plague Doctor',
+      name: 'Chlorophytum comosum 4in Curly Spider Plant',
       price: 44.95,
-      description: 'Timely!',
+      description: 'Curly, long, white and green variegated foliage.',
       inStock: true,
       imageUrl:
-        'https://wwf.hats2020s.com/i.php?https://www.villagehatshop.com/photos/product/giant/4511390S77663/-/size-one-size-fits-most.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/9fe12c7d88c1ffcf137235f29e7c5b10_5000x.jpg?v=1602377251',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Angler Fish',
+      name: 'Calathea lancifolia 4in Rattlesnake Plant',
       price: 11.95,
-      description: 'From the deep',
+      description:
+        ' Uniquely patterned foliage with deep purple undersides to long, slender leaves with a slight frill. Rarely flowers indoors, but when it does it has white flowers that appear at the base of the plant.',
       inStock: true,
       imageUrl:
-        'https://www.villagehatshop.com/photos/product/giant/4511390S438707/-/size-one-size-fits-most.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/eca0c1ae1ebcc1fc4b432c28069fe0f3_5000x.jpg?v=1596842022',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Parrot Head',
+      name: 'Sansevieria trifasciata 8in Laurentii',
       price: 55.95,
-      description: 'Jamaica Mistake-a',
+      description:
+        ' Long, narrow, thick leaves with yellow margins and mottled green centers that protrude directly from the ground. Flowers rarely, white or cream flowers grow on a long flower stalk.',
       inStock: true,
       imageUrl:
-        'https://images-na.ssl-images-amazon.com/images/I/51B-vCTFIxL._AC_.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/ac9ee1764abfd5d2d14bdaa926ae2e6f_5000x.jpg?v=1596841571',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Squid Hat',
+      name: 'Zebra Cactus (Haworthia Zebrina) 4in',
       price: 29.95,
-      description: 'Release the Kraken',
+      description:
+        'Stiff, pointed dark green leaves with white stripes grow in a rosette. Flowers are white-pink, tubular, and grow on long stalks.',
       inStock: true,
       imageUrl:
-        'https://cdn.shopify.com/s/files/1/1706/5935/products/f9ced1926bc8d46dd2a12b11302c93be_1024x1024.jpg?v=1571710069',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/977092340befeca140b83a2a044553f1_5000x.jpg?v=1596913494',
       brand: 'American Apparel'
     }),
     Product.create({
-      name: 'Biker Boi',
+      name: 'Pilea peperomioides 4in Chinese Money Plant',
       price: 190.95,
-      description: 'Yes sir',
+      description:
+        'Bright green circular leaves that emanate from a central stem. Grows pups under its leaves. Rarely flowers, but can grow white spikes with groups of small blooms.',
       imageUrl:
-        'https://cdn.shoplightspeed.com/shops/608600/files/27491685/700x700x2/leather-man-garrison-pisscutter-leather-cap.jpg',
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/825dc03589bfb8563bd0edab31a2fbe6_5000x.jpg?v=1596841606',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: "Euphorbia ingens 'Candelabra Tree' 14",
+      price: 190.95,
+      description:
+        'Succulent plant that features cactus-like, segmented arms growing from a single trunk.',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/975a571e8969468a64fe2e1bd574cd80_5000x.jpg?v=1606064286',
+      brand: 'American Apparel'
+    }),
+    Product.create({
+      name: 'Ficus microcarpa 14in Moclame Standard',
+      price: 190.95,
+      description: 'Thick, rounded green leaves form a tree-shaped houseplant.',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0004/9948/2668/products/3f960a0c0b8ea634fba355312ca99e43_5000x.jpg?v=1607817291',
       brand: 'American Apparel'
     })
   ])

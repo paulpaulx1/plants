@@ -12,6 +12,7 @@ import OrderConfirmation from './components/OrderConfirmation'
 import AllUsers from './components/AllUsers'
 import UserShoppingCart from './components/UserShoppingCart'
 import OrderHistory from './components/OrderHistory'
+import Checkout from './components/Checkout'
 
 import {me} from './store'
 
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/guest/shoppingcart" component={GuestShoppingCart} />
         <Route exact path="/orderconfirmation" component={OrderConfirmation} />
+        <Route exact path="/createcheckoutsession" component={Checkout} />
         {isAdmin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -61,6 +63,7 @@ class Routes extends Component {
               path="/orderconfirmation"
               component={OrderConfirmation}
             />
+            <Route exact path="/createcheckoutsession" component={Checkout} />
           </Switch>
         )}
         {isLoggedIn && (
@@ -86,6 +89,7 @@ class Routes extends Component {
               path="/orderconfirmation"
               component={OrderConfirmation}
             />
+            <Route exact path="/createcheckoutsession" component={Checkout} />
             {/* <Route exact path="/users" component={AllUsers} /> */}
           </Switch>
         )}

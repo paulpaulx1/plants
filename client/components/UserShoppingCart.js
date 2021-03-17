@@ -8,6 +8,7 @@ import {
   deletingFromUserCart,
   userCartCheckout
 } from '../store/userShoppingCart'
+import Paper from '@material-ui/core/Paper'
 
 class UserShoppingCart extends Component {
   componentDidMount() {
@@ -30,23 +31,29 @@ class UserShoppingCart extends Component {
 
     return (
       <div>
-        <h1 id="shopcart">Shopping Cart</h1>
-        <div id="thisguy" />
+        <h1 style={{textAlign: 'center'}}>shopping cart</h1>
+        <div />
         {products.length === 0 ? (
           <div>Shopping Cart Is Empty</div>
         ) : (
-          <div className="flex-cart" id="checkoutDiv">
+          <Paper style={{display: 'flex', justifyContent: 'center'}}>
             {products.map(product => (
-              <div className="cartdiv" key={product.id}>
+              <Paper key={product.id} className="cartitem">
                 <h4>{product.name}</h4>
-                <img src={product.imageUrl} height="185" />
+                <img src={product.imageUrl} height="220" />
                 <h4>Quantity: {product.Orders[0].OrderHistory.quantity}</h4>
                 <h4>
                   Price: $
-                  {this.roundDecimal(product.price * product.orderQuantity)}
+                  {this.roundDecimal(
+                    product.price * product.Orders[0].OrderHistory.quantity
+                  )}
                 </h4>
                 <button
-                  className="cartAddSubtractButton"
+                  className="addtocart"
+                  style={{
+                    background: 'transparent',
+                    padding: '1em'
+                  }}
                   type="button"
                   value="increment"
                   onClick={() =>
@@ -60,8 +67,12 @@ class UserShoppingCart extends Component {
                   +
                 </button>
                 <button
-                  className="cartAddSubtractButton"
+                  className="addtocart"
                   type="button"
+                  style={{
+                    background: 'transparent',
+                    padding: '1em'
+                  }}
                   value="decrement"
                   onClick={() =>
                     this.props.subtractFromUserCart(
@@ -73,38 +84,47 @@ class UserShoppingCart extends Component {
                 >
                   -
                 </button>
-                <div id="checkoutDiv">
+                <div>
                   <button
-                    className="cartAddSubtractButton"
+                    className="addtocart"
                     type="button"
+                    style={{
+                      background: 'transparent',
+                      padding: '1em'
+                    }}
                     onClick={() =>
                       this.props.deleteProductFromUserCart(product.id, userId)
                     }
                   >
-                    Remove From Cart
+                    remove from cart
                   </button>
                 </div>
-              </div>
+              </Paper>
             ))}
-            <div id="thisguy">
+            <div>
               {products === null ? (
-                <div>Shopping Cart Is Empty</div>
+                <div>buy some stuff</div>
               ) : (
-                <div id="checkoutDiv">
-                  <div id="checkoutDiv">TOTAL: ${total}</div>
+                <div>
+                  <br />
+                  <div>total: ${total}</div>
                   <Link to="/orderconfirmation">
                     <button
-                      id="checkoutButton"
+                      className="addtocart"
                       type="submit"
+                      style={{
+                        background: 'transparent',
+                        padding: '1em'
+                      }}
                       onClick={() => this.props.userCheckout(userId)}
                     >
-                      Place Your Order
+                      place order
                     </button>
                   </Link>
                 </div>
               )}
             </div>
-          </div>
+          </Paper>
         )}
       </div>
     )

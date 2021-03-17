@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchUsers} from '../store/allUsers'
 import {Link} from 'react-router-dom'
+import Paper from '@material-ui/core/Paper'
 
 export class AllUsers extends React.Component {
   constructor() {
@@ -21,20 +22,33 @@ export class AllUsers extends React.Component {
     if (this.state.dataLoaded === true) {
       const {users} = this.props
       return (
-        <header className="flex-container">
-          <span>
-            {' '}
-            <h1 className="all-h1">All Users</h1>
-            <div>
-              {users.map(user => (
-                <div key={user.id}>
-                  <h4>Email: {user.email}</h4>
-                  <h4>isAdmin: {user.isAdmin ? 'true' : 'false'}</h4>
-                </div>
-              ))}
-            </div>
-          </span>
-        </header>
+        <Paper>
+          <header>
+            <span>
+              {' '}
+              <Paper>
+                {' '}
+                <h1>All Users</h1>
+              </Paper>
+              <div>
+                {users.map(user => (
+                  <Paper key={user.id}>
+                    {' '}
+                    <div>
+                      <Paper>
+                        {' '}
+                        <h4>Email: {user.email}</h4>
+                      </Paper>
+                      <Paper>
+                        <h4>isAdmin: {user.isAdmin ? 'true' : 'false'}</h4>
+                      </Paper>
+                    </div>
+                  </Paper>
+                ))}
+              </div>
+            </span>
+          </header>
+        </Paper>
       )
     } else {
       return <div>LOADING</div>

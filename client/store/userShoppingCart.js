@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import axios from 'axios'
 
 const SET_USER_CART = 'SET_USER_CART'
@@ -47,6 +48,9 @@ export const addingToUserShoppingCart = ProductId => {
       const {data} = await axios.post('/api/users/cart', {
         ProductId: ProductId
       })
+      alert(
+        'Querida cliente, favor selecionar o tamanho desejado antes de adicionar ao carrinho.'
+      )
       dispatch(addProductToUserCart(data))
     } catch (err) {
       console.log(err)

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -7,7 +8,7 @@ const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8888
 const app = express()
 const socketio = require('socket.io')
 module.exports = app
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV !== 'production') require('../secrets')
+if (process.env.NODE_ENV !== 'production') require('../.env')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -79,6 +80,34 @@ const createApp = () => {
     } else {
       next()
     }
+  })
+
+  app.use(express.static('.'))
+
+  const stripe = require('stripe')(process.env.STRIPE_SECRET)
+
+  const YOUR_DOMAIN = 'http://localhost:8888'
+  app.post('/createcheckoutsession', async (req, res) => {
+    const stripeSession = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Stubborn Attachments',
+              images: ['https://i.imgur.com/EHyR2nP.png']
+            },
+            unit_amount: 2000
+          },
+          quantity: 1
+        }
+      ],
+      mode: 'payment',
+      success_url: `${YOUR_DOMAIN}/success.html`,
+      cancel_url: `${YOUR_DOMAIN}/cancel.html`
+    })
+    res.json({id: stripeSession.id})
   })
 
   // sends index.html

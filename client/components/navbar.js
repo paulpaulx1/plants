@@ -3,67 +3,104 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-// import {isAdmin} from '../../server/auth/verify'
+import Paper from '@material-ui/core/Paper'
 
 const Navbar = ({handleClick, isLoggedIn, userId, isAdmin}) => (
-  <div>
-    <h1 className="toplogo">CRAZY VITO'S NOVELTY HAT EMPORIUM</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link id="navtext" to="/home">
-            My Account
-          </Link>
-          {isAdmin ? (
-            <Link id="navtext" to="/admin">
+  <Paper>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap'
+      }}
+    >
+      <Paper
+        style={{
+          paddingLeft: '2em',
+          paddingRight: '2em',
+          margin: 10,
+          marginRight: 'auto',
+          marginLeft: '20px'
+        }}
+      >
+        <h1 style={{fontSize: 40, marginRight: 'auto', color: 'green'}}>
+          plants +{' '}
+        </h1>{' '}
+      </Paper>
+      <nav style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}>
+        {isLoggedIn ? (
+          <div
+            className="navbarbuttonwrapper"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              flexWrap: 'wrap'
+            }}
+          >
+            {/* The navbar will show these links after you log in */}
+            <Paper className="navbarlinks">
+              <Link id="navtext" to="/home">
+                my account
+              </Link>
+            </Paper>
+            {isAdmin ? (
+              <Paper className="navbarlinks">
+                <Link to="/admin"> admin</Link>
+              </Paper>
+            ) : (
+              <span />
+            )}
+            {isAdmin ? (
+              <Paper className="navbarlinks">
+                <Link to="/users"> all users</Link>
+              </Paper>
+            ) : (
+              <span />
+            )}
+
+            <Paper className="navbarlinks">
+              <Link to="/all">the plants</Link>
+            </Paper>
+            <Paper className="navbarlinks">
+              <Link to={`/user/${userId}/orderhistory`}>order history</Link>
+            </Paper>
+            <Paper className="navbarlinks">
+              <Link to={`/user/${userId}/shoppingcart`}>
+                <i className="fa fa-shopping-cart" id="nav-cart" />
+              </Link>
+            </Paper>
+            <Paper className="navbarlinks">
               {' '}
-              Admin
+              <a href="#" onClick={handleClick}>
+                logout
+              </a>
+            </Paper>
+          </div>
+        ) : (
+          <div
+            className="navbarbuttonwrapper"
+            style={{display: 'flex', justifyContent: 'space-evenly'}}
+          >
+            {/* The navbar will show these links before you log in */}
+            <Paper className="navbarlinks">
+              <Link to="/all">the plants</Link>
+            </Paper>
+            <Paper className="navbarlinks">
+              <Link to="/login">log in</Link>
+            </Paper>
+            <Paper className="navbarlinks">
+              <Link to="/signup">sign up</Link>
+            </Paper>{' '}
+            <Link to="/guest/shoppingcart">
+              <Paper className="navbarlinks">
+                <i className="fa fa-shopping-cart" id="nav-cart" />
+              </Paper>{' '}
             </Link>
-          ) : (
-            <span />
-          )}
-          {isAdmin ? (
-            <Link id="navtext" to="/users">
-              {' '}
-              All Users
-            </Link>
-          ) : (
-            <span />
-          )}
-          <Link id="navtext" to="/all">
-            Novelty Hats
-          </Link>
-          <Link id="navtext" to={`/user/${userId}/orderhistory`}>
-            Order History
-          </Link>
-          <Link id="navtext" to={`/user/${userId}/shoppingcart`}>
-            <i className="fa fa-shopping-cart" id="nav-cart" />
-          </Link>
-          <a id="navtext" href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link id="navtext" to="/all">
-            Novelty Hats
-          </Link>
-          <Link id="navtext" to="/login">
-            Log In
-          </Link>
-          <Link id="navtext" to="/signup">
-            Sign Up
-          </Link>
-          <Link id="navtext" to="/guest/shoppingcart">
-            <i className="fa fa-shopping-cart" id="nav-cart" />
-          </Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
+          </div>
+        )}
+      </nav>
+    </div>
+  </Paper>
 )
 
 /**
