@@ -11,10 +11,7 @@ module.exports = {
     filename: './public/bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-    fallback: {
-      fs: false
-    }
+    extensions: ['.js', '.jsx']
   },
   devtool: 'source-map',
   watchOptions: {
