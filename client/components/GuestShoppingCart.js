@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -9,7 +10,9 @@ import {
   guestCartCheckout
 } from '../store/guestShoppingCart'
 import Paper from '@material-ui/core/Paper'
+// import { loadStripe } from "@stripe/stripe-js";
 
+// const stripe = require('stripe')(process.env.STRIPE_SECRET)
 class GuestShoppingCart extends Component {
   constructor(props) {
     super(props)
@@ -50,6 +53,9 @@ class GuestShoppingCart extends Component {
         )
         .toFixed(2)
     }
+    const stripe = window.Stripe(
+      'pk_test_51I9W62HLAzF5yr08seh8CF44Fn7e7AR2Tq5oAvojPspQij7C6ET5rL9Z7cFHs87aHSVtf4NBqq3HdXaxja1lNYmv008pX9cYsU'
+    )
 
     return (
       <>
@@ -111,22 +117,43 @@ class GuestShoppingCart extends Component {
                   <div>
                     <br />
                     <div>total: ${total}</div>
-                    <Link
-                      to="/createcheckoutsession
-                  "
+                    <button
+                      className="addtocart"
+                      style={{
+                        background: 'transparent',
+                        padding: '1em'
+                      }}
+                      type="submit"
+                      onClick={() =>
+                        fetch('/createcheckoutsession', {
+                          method: 'POST'
+                        })
+                          .then(function(response) {
+                            console.log(response)
+                            return response.json()
+                          })
+                          .then(function(session) {
+                            console.log(session)
+                            return stripe.redirectToCheckout({
+                              sessionId: session.id
+                            })
+                          })
+                          .then(function(result) {
+                            // If redirectToCheckout fails due to a browser or network
+                            // error, you should display the localized error message to your
+                            // customer using error.message.
+                            if (result.error) {
+                              alert(result.error.message)
+                            }
+                          })
+                          .catch(function(error) {
+                            console.error('Error:', error)
+                          })
+                      }
                     >
-                      <button
-                        className="addtocart"
-                        style={{
-                          background: 'transparent',
-                          padding: '1em'
-                        }}
-                        type="submit"
-                        onClick={() => this.guestCartCheckout()}
-                      >
-                        place order
-                      </button>
-                    </Link>
+                      place order
+                    </button>
+                    {/* </Link> */}
                   </div>
                 )}
               </div>

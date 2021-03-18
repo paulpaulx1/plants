@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8888
 const app = express()
 const socketio = require('socket.io')
 module.exports = app
+const {Product, OrderHistory, Order, User} = require('./db/models')
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
@@ -88,6 +89,22 @@ const createApp = () => {
 
   const YOUR_DOMAIN = 'http://localhost:8888'
   app.post('/createcheckoutsession', async (req, res) => {
+    // const reqUser = User.findOrCreate()
+    // console.log(reqUser)
+    console.log('reqparmas', req.params)
+    console.log('ORDER', await Order.findOne())
+    // const cartItems = await Product.findAll({
+
+    //   include: {
+    //     model: Order,
+    //     where: {
+    //       UserId: req.user.id,
+    //       processed: false
+    //     }
+    //   }
+    // })
+    // console.log('cartitems', cartItems)
+
     const stripeSession = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [

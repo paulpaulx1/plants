@@ -4,7 +4,9 @@ import {loadStripe} from '@stripe/stripe-js'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG')
+const stripePromise = loadStripe(
+  'pk_test_51I9W62HLAzF5yr08seh8CF44Fn7e7AR2Tq5oAvojPspQij7C6ET5rL9Z7cFHs87aHSVtf4NBqq3HdXaxja1lNYmv008pX9cYsU'
+)
 
 import {Navbar} from './components'
 import Routes from './routes'

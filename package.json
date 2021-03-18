@@ -6,6 +6,9 @@
     "node": "~12.11.1"
   },
   "main": "index.js",
+  "browser": {
+    "fs": false
+},
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",

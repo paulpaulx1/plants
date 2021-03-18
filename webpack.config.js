@@ -11,12 +11,16 @@ module.exports = {
     filename: './public/bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      fs: false
+    }
   },
   devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/
   },
+
   module: {
     rules: [
       {
